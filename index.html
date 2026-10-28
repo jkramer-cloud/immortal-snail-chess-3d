@@ -9,14 +9,54 @@
 @media(max-width:1040px){.layout{grid-template-columns:minmax(0,1fr) 280px}.scene{height:580px}.arena{min-height:580px}}
 @media(max-width:790px){.app{padding:12px}.header{align-items:flex-start;flex-wrap:wrap}.top-actions button{padding:8px 9px;font-size:12px}.layout{grid-template-columns:1fr}.scene{height:min(85vw,590px);min-height:350px}.arena{min-height:350px}.side{display:grid;grid-template-columns:1fr 1fr;align-items:start}.rules-panel{grid-column:span 2}.arena-head{left:13px;right:13px;top:12px}.turnlabel{font-size:18px}.legend{display:none}.mobile-hint{display:block;font-size:11px;color:#b6c7d6;position:absolute;bottom:18px;left:12px;z-index:3;pointer-events:none}}
 @media(max-width:480px){.side{display:flex}.brandmark{width:42px;height:42px}.eyebrow{font-size:9px}h1{font-size:24px}.top-actions{width:100%}.top-actions button{flex:1}.scene{height:390px;min-height:390px}.arena{min-height:390px}.status-note{font-size:10px}.countdown{padding:7px 9px}.countdown b{font-size:17px}.camera-buttons button{padding:7px}.arena-foot{bottom:10px;right:10px;left:10px}.mobile-hint{display:none}.notice{white-space:nowrap;font-size:19px}}
+
+/* Learning-friendly movement sidebar and randomized starting player */
+.options .first-move-field,.options .first-move-note{grid-column:1/-1}
+.options .first-move-field{margin-top:2px}
+.first-move-note{margin-top:-4px}
+.side .action-row button{font-size:11px;white-space:nowrap}
+.layout{grid-template-columns:232px minmax(0,1fr) 300px;align-items:start;gap:14px}
+.move-reference{padding:14px;max-height:none}
+.move-reference h2{margin-bottom:6px}
+.guide-intro{font-size:11px;color:#9bb8c9;margin:0 0 12px;line-height:1.55}
+.guide-list{display:flex;flex-direction:column;gap:8px}
+.guide-piece{display:grid;grid-template-columns:68px minmax(0,1fr);align-items:center;gap:10px;background:#1b3143;border:1px solid #355066;border-radius:11px;padding:8px}
+.guide-piece:hover{border-color:#61b7b1;background:#203c4d}
+.guide-grid{display:grid;grid-template-columns:repeat(5,1fr);aspect-ratio:1;width:68px;overflow:hidden;border:1px solid #496174;border-radius:5px}
+.guide-square{display:grid;place-items:center;position:relative;font-size:11px;line-height:1;color:#0c2d3a}
+.guide-square.light{background:#ded8c4}.guide-square.dark{background:#507087}
+.guide-square.reach:after{content:'';width:5px;height:5px;border-radius:50%;background:#65ecdc;box-shadow:0 0 5px #b0fff2}
+.guide-square.capture:after{content:'×';font-size:16px;font-weight:900;color:#f9a9a4;text-shadow:0 1px 2px #213142}
+.guide-square.center{font-size:18px;color:#fff9e5;text-shadow:0 2px 4px #000a;background:#294657}
+.guide-name{color:#f2e9d7;font-size:12px;font-weight:850;margin:0 0 3px}
+.guide-description{color:#a9bfd1;font-size:10px;line-height:1.4;margin:0}
+.guide-legend{font-size:10px;line-height:1.55;color:#9cb4c4;border-top:1px solid #345066;margin-top:11px;padding-top:10px}
+.guide-key{display:inline-block;width:6px;height:6px;border-radius:50%;background:#65ecdc;margin:0 3px 1px 0}
+.guide-x{color:#f7a6a1;font-weight:bold}
+.first-move-field{margin-top:13px}
+.first-move-note{margin-top:7px;font-size:11px;color:#a9beca;line-height:1.5;min-height:17px}
+.dice-overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;z-index:10;background:#071521dc;backdrop-filter:blur(8px)}
+.dice-overlay.show{display:flex}
+.dice-card{width:min(360px,88%);padding:26px;text-align:center;background:linear-gradient(145deg,#183a4a,#19273c);border:1px solid #60bdb8;border-radius:21px;box-shadow:0 15px 65px #000b}
+.die-face{font-family:Georgia,serif;font-size:84px;line-height:1.08;color:#ffe19c;text-shadow:0 5px 20px #dfa86e70;display:block;margin-bottom:8px;transform-origin:center;}
+.dice-overlay.rolling .die-face{animation:die-bounce .18s linear infinite alternate}
+@keyframes die-bounce{from{transform:rotate(-16deg) scale(.94)}to{transform:rotate(19deg) scale(1.09)}}
+.dice-headline{font-size:22px;font-weight:850;margin:5px 0}
+.dice-detail{font-size:12px;color:#c1d5e0;line-height:1.5}
+@media(max-width:1190px){.layout{grid-template-columns:205px minmax(0,1fr) 270px;gap:10px}.app{padding:14px}.move-reference{padding:10px}.guide-piece{grid-template-columns:59px minmax(0,1fr);gap:7px;padding:6px}.guide-grid{width:59px}.guide-description{font-size:9.5px}}
+@media(max-width:990px){.layout{grid-template-columns:minmax(0,1fr) 280px;gap:14px}.arena{grid-column:1;grid-row:1}.side{grid-column:2;grid-row:1 / span 2}.move-reference{grid-column:1;grid-row:2}.guide-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.guide-piece{grid-template-columns:62px minmax(0,1fr)}.guide-grid{width:62px}}
+@media(max-width:790px){.layout{display:flex;flex-direction:column}.arena,.side,.move-reference{width:100%;order:0}.arena{order:1}.move-reference{order:2}.side{order:3}.guide-list{grid-template-columns:repeat(2,minmax(0,1fr))}.move-reference{padding:14px}}
+@media(max-width:480px){.guide-list{grid-template-columns:1fr 1fr}.guide-piece{grid-template-columns:1fr;justify-items:center;text-align:center;min-height:115px;gap:3px}.guide-grid{width:65px}.guide-description{font-size:10px}.dice-card{padding:18px}}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="header"><div class="brand"><div class="brandmark">🐌</div><div><div class="eyebrow">The royal chase · 3D arena</div><h1>Immortal Snail Chess</h1></div></div><div class="top-actions"><button id="soundBtn" title="Toggle synthesized sounds">♪ Sound on</button><button id="undoTop">↶ Undo</button><button id="resetTop" class="primary">↻ New game</button></div></header>
-<main class="layout"><section class="arena"><div class="arena-head"><div><div class="roundname" id="roundText">THE HUNT BEGINS</div><div class="turnlabel" id="turnText">White to move</div><div class="status-note" id="subtitle">Select a chess piece to see legal moves.</div></div><div class="countdown"><small>Snails move in</small><b id="countText">6 turns</b></div></div><canvas id="scene" class="scene selectable" tabindex="0" aria-label="Interactive 3D chess game. Click a piece and a highlighted square to move it."></canvas><div class="notice" id="notice"></div><div class="arena-foot"><span class="legend">Drag to rotate · Scroll to zoom · Tap to move</span><div class="camera-buttons"><button id="cameraHome" title="Return to angled view">◈ 3D</button><button id="cameraTop" title="View from overhead">▣ Top</button><button id="cameraFlip" title="Rotate the board 180 degrees">⟳ Flip</button></div></div><div class="mobile-hint">Tap a piece, then a highlighted square</div><div class="winner" id="winner"><div class="winner-card"><div class="trophy" id="winIcon">🏆</div><h3 id="winTitle">Victory!</h3><p id="winDetails"></p><button class="primary" id="winAgain">Play again</button></div></div></section>
+<main class="layout">
+<aside class="move-reference panel" aria-label="Chess piece movement reference"><h2>How pieces move</h2><p class="guide-intro">Movement guide. The center icon is your piece; glowing dots show where it can move on an empty board.</p><div id="moveGuide" class="guide-list"></div><div class="guide-legend"><span class="guide-key"></span> Legal direction &nbsp; <span class="guide-x">×</span> Pawn captures<br>White pawns move upward; Black pawns move downward. Other pieces cannot jump over blockers (except knights).</div></aside>
+<section class="arena"><div class="arena-head"><div><div class="roundname" id="roundText">THE HUNT BEGINS</div><div class="turnlabel" id="turnText">White to move</div><div class="status-note" id="subtitle">Select a chess piece to see legal moves.</div></div><div class="countdown"><small>Snails move in</small><b id="countText">6 turns</b></div></div><canvas id="scene" class="scene selectable" tabindex="0" aria-label="Interactive 3D chess game. Click a piece and a highlighted square to move it."></canvas><div class="notice" id="notice"></div><div id="diceOverlay" class="dice-overlay" role="status" aria-live="polite"><div class="dice-card"><span class="die-face" id="dieFace">⚄</span><div class="dice-headline" id="diceHeadline">Rolling for first move…</div><div class="dice-detail" id="diceDetail">Odd roll = White · Even roll = Black</div></div></div><div class="arena-foot"><span class="legend">Drag to rotate · Scroll to zoom · Tap to move</span><div class="camera-buttons"><button id="cameraHome" title="Return to angled view">◈ 3D</button><button id="cameraTop" title="View from overhead">▣ Top</button><button id="cameraFlip" title="Rotate the board 180 degrees">⟳ Flip</button></div></div><div class="mobile-hint">Tap a piece, then a highlighted square</div><div class="winner" id="winner"><div class="winner-card"><div class="trophy" id="winIcon">🏆</div><h3 id="winTitle">Victory!</h3><p id="winDetails"></p><button class="primary" id="winAgain">Play again</button></div></div></section>
 <aside class="side"><div class="panel"><h2>Royal pursuit</h2><div class="versus"><div class="player"><span class="player-icon">♔</span><span>White</span></div><span class="vs">VS</span><div class="player"><span class="player-icon dark">♚</span><span id="blackLabel">Computer</span></div></div><div class="snailrow"><span class="snailpill">🟠 Amber snail</span><span class="snailpill">🟢 Jade snail</span></div><div class="bar"><span id="meter"></span></div><div class="empty" id="snailInfo">The invincible snails will advance after every three full chess moves.</div><div class="action-row"><button id="undoBtn">↶ Undo move</button><button id="hintBtn">✧ Hint</button></div></div>
-<div class="panel"><h2>Game settings</h2><div class="options"><div class="field"><label for="mode">Opponent</label><select id="mode"><option value="bot">Computer</option><option value="local">2 players</option></select></div><div class="field"><label for="pace">Snail speed</label><select id="pace"><option value="2">Fast: 2 rounds</option><option value="3" selected>Classic: 3 rounds</option><option value="4">Relaxed: 4 rounds</option><option value="5">Slow: 5 rounds</option></select></div></div><div class="switches"><label><input type="checkbox" id="showThreats" checked/> Snail landing hints</label><label><input type="checkbox" id="particlesToggle" checked/> Effects</label></div><div class="footer">Settings apply when you start a new game.</div><div class="action-row"><button id="resetSide" class="primary">Start new game</button></div></div>
+<div class="panel"><h2>Game settings</h2><div class="options"><div class="field"><label for="mode">Opponent</label><select id="mode"><option value="bot">Computer</option><option value="local">2 players</option></select></div><div class="field"><label for="pace">Snail speed</label><select id="pace"><option value="2">Fast: 2 rounds</option><option value="3" selected>Classic: 3 rounds</option><option value="4">Relaxed: 4 rounds</option><option value="5">Slow: 5 rounds</option></select></div><div class="field first-move-field"><label for="firstPlayer">Who moves first?</label><select id="firstPlayer"><option value="white" selected>White (traditional)</option><option value="black">Black (house rule)</option><option value="random">🎲 Roll the die (random)</option></select></div><div id="firstMoveNote" class="first-move-note">Traditional rules: White begins. Roll the die to make it random!</div></div><div class="switches"><label><input type="checkbox" id="showThreats" checked/> Snail landing hints</label><label><input type="checkbox" id="particlesToggle" checked/> Effects</label></div><div class="footer">Settings apply when you start a new game.</div><div class="action-row"><button id="rollBtn" title="Roll a six-sided die to randomly decide who moves first">🎲 Roll dice</button><button id="resetSide" class="primary">New match</button></div></div>
 <div class="panel"><h2>Move history</h2><div class="move-list" id="moveLog"><div class="empty">Your opening move will appear here.</div></div></div>
 <div class="panel rules-panel"><h2>How to survive</h2><div class="rules">Move your chess pieces normally. Every <b>three complete rounds</b>, both immortal snails crawl one square toward the enemy king. <b>They cannot be captured or blocked.</b> Anything they reach is destroyed, including kings. Win by checkmate or catching the enemy king with a snail. Look out for the <b>glowing warning squares</b> before they move.<br/><br/>Use the mouse to orbit the real 3D board, or switch to the overhead view for precise play.</div></div></aside></main>
 </div>
@@ -31,7 +71,7 @@ const isOn=i=>i>=0&&i<128&&!(i&0x88);
 const side=p=>!p||p==='.'?0:p===p.toUpperCase()?1:-1;
 const algebraic=i=>files[i&7]+(8-(i>>4));
 const mk=(a,b,p='',f='')=>[a,b,p,f];
-const sqPos=i=>[i&7-3.5,(i>>4)-3.5];
+const sqPos=i=>[(i & 7) - 3.5, (i >> 4) - 3.5]; // Center each of the 64 squares. Parentheses prevent bitwise precedence errors.
 const snailAt=(s,i)=>s.sn.some(a=>a.pos===i);
 function makeStart(){const b=Array(128).fill('.');let setup='rnbqkbnr';for(let c=0;c<8;c++){b[c]=setup[c];b[16+c]='p';b[96+c]='P';b[112+c]=setup[c].toUpperCase();}
   return {b,t:1,c:15,ep:-1,half:0,full:1,ply:0,sn:[{pos:64,target:-1,id:0,trail:[]},{pos:55,target:1,id:1,trail:[]}],end:'',who:0};}
@@ -115,36 +155,66 @@ const shadowMesh=new Mesh();shadowMesh.lathe([[.005,.25],[.012,.35]],'#101623',2
 const floorMesh=new Mesh();floorMesh.box(0,-.62,0,200,.12,200,'#132535');const floor=upload(floorMesh);
 const dustMesh=new Mesh();dustMesh.sphere(0,0,0,.07,.07,.07,'#ffe9aa',8,6);const dust=upload(dustMesh);
 const activeTrail=new Mesh();activeTrail.sphere(0,0,0,.27,.014,.25,'#ffffff',12,6);const trailGem=upload(activeTrail);
-let state=makeStart(),hist=[],notated=[],selected=-1,pending=[],settings={pace:3,mode:'bot',threats:true,effects:true},sceneYaw=.20,sceneElev=.96,sceneDist=(window.innerWidth<600?18.0:15.4),targetYaw=.2,targetElev=.96,targetDist=(window.innerWidth<600?18.0:15.4),fxMoves=[],fxSnails=[],fxDust=[],flash=[],noticeTimer=null,botTimer=null,animating=false,lastTs=0,soundOn=true,hintMove=null;
+let state=makeStart(),hist=[],notated=[],selected=-1,pending=[],settings={pace:3,mode:'bot',threats:true,effects:true},sceneYaw=.20,sceneElev=.96,sceneDist=(window.innerWidth<600?18.0:15.4),targetYaw=.2,targetElev=.96,targetDist=(window.innerWidth<600?18.0:15.4),fxMoves=[],fxSnails=[],fxDust=[],flash=[],noticeTimer=null,botTimer=null,moveTimer=null,rollTimer=null,rollFinish=null,rolling=false,animating=false,lastTs=0,soundOn=true,hintMove=null;
 const UI=id=>document.getElementById(id);
+// Five-by-five movement sketches help new players learn at a glance.
+function createMoveGuide(){
+ const data=[
+  {type:'p',name:'Pawn',symbol:'♙',desc:'Forward 1 (or 2 on its first move); captures diagonally.'},
+  {type:'r',name:'Rook',symbol:'♖',desc:'Straight lines: horizontal and vertical.'},
+  {type:'n',name:'Knight',symbol:'♘',desc:'L-shape: 2 squares then 1. Jumps over pieces.'},
+  {type:'b',name:'Bishop',symbol:'♗',desc:'Any distance along diagonals.'},
+  {type:'q',name:'Queen',symbol:'♕',desc:'Any distance in straight or diagonal lines.'},
+  {type:'k',name:'King',symbol:'♔',desc:'One square in any direction, never into check.'},
+  {type:'s',name:'Immortal snail',symbol:'🐌',desc:'Automatically crawls 1 adjacent square toward its target king. Cannot be captured.'},
+ ];
+ const markup=data.map(({type,name,symbol,desc})=>{
+  let cells='';for(let r=0;r<5;r++)for(let c=0;c<5;c++){
+   const dy=r-2,dx=c-2,dist=Math.max(Math.abs(dx),Math.abs(dy)),center=dx===0&&dy===0;
+   const capture=type==='p'&&dy===-1&&Math.abs(dx)===1;
+   const reach=type==='p'?(dx===0&&(dy===-1||dy===-2)):
+    type==='r'?(dx===0||dy===0):
+    type==='b'?(Math.abs(dx)===Math.abs(dy)):
+    type==='n'?((Math.abs(dx)===1&&Math.abs(dy)===2)||(Math.abs(dx)===2&&Math.abs(dy)===1)):
+    type==='q'?(dx===0||dy===0||Math.abs(dx)===Math.abs(dy)):
+    (type==='k'||type==='s')&&dist===1;
+   const cls=center?' center':capture?' capture':reach?' reach':'';
+   cells+=`<span class="guide-square ${(r+c)%2===0?'light':'dark'}${cls}">${center?symbol:''}</span>`;
+  }
+  return `<div class="guide-piece"><div class="guide-grid" aria-hidden="true">${cells}</div><div><div class="guide-name">${name}</div><p class="guide-description">${desc}</p></div></div>`;
+ }).join('');
+ UI('moveGuide').innerHTML=markup;
+}
+createMoveGuide();
+
 const camera={};function updateCamera(){const aspect=Math.max(.3,canvas.width/canvas.height),ce=Math.cos(sceneElev),eye=[sceneDist*ce*Math.sin(sceneYaw),sceneDist*Math.sin(sceneElev),sceneDist*ce*Math.cos(sceneYaw)];camera.eye=eye;camera.forward=normalize(sub([0,0,0],eye));camera.right=normalize(cross(camera.forward,[0,1,0]));camera.up=normalize(cross(camera.right,camera.forward));camera.fov=.68;camera.aspect=aspect;camera.vp=matMul(perspective(camera.fov,aspect,.1,100),lookAt(eye,[0,0,0],[0,1,0]));}
 function pickBoard(px,py){const w=canvas.clientWidth,h=canvas.clientHeight,nx=(px/w*2-1),ny=(1-py/h*2),height=Math.tan(camera.fov/2),direction=normalize(camera.forward.map((v,i)=>v+camera.right[i]*nx*height*camera.aspect+camera.up[i]*ny*height));if(direction[1]>=-.01)return -1;const t=-camera.eye[1]/direction[1],x=camera.eye[0]+direction[0]*t,z=camera.eye[2]+direction[2]*t;const c=Math.floor(x+4),r=Math.floor(z+4);return c>=0&&c<8&&r>=0&&r<8?r*16+c:-1;}
 const ease=t=>1-Math.pow(1-t,3);
 function particleBurst(cell,kind,count=24){if(!settings.effects)return;const [x,z]=sqPos(cell),palette=kind===0?['#ffd5a6','#fd865f','#ffe28c']:kind===1?['#83ffc2','#50bcb2','#f2fff1']:['#f8e3ba','#9bdadf','#f6a6bd'];for(let i=0;i<count;i++){let a=Math.random()*6.28,speed=Math.random()*.13+.04;fxDust.push({x,z,y:.3,vx:Math.cos(a)*speed,vy:Math.random()*.13+.055,vz:Math.sin(a)*speed,life:1,size:Math.random()*.06+.025,color:rgb(palette[i%palette.length])});}}
 function playTone(kind='move'){if(!soundOn)return;try{const Context=window.AudioContext||window.webkitAudioContext;if(!Context)return;const ac=playTone.ctx||(playTone.ctx=new Context());if(ac.state==='suspended')ac.resume();const now=ac.currentTime;let pitches=kind==='move'?[270,340]:kind==='snail'?[170,116,230]:kind==='capture'?[125,83]:kind==='win'?[440,550,660,880]:[220];pitches.forEach((hz,i)=>{const oscillator=ac.createOscillator(),gain=ac.createGain();oscillator.type=kind==='snail'?'sine':kind==='win'?'triangle':'sine';oscillator.frequency.setValueAtTime(hz,now+i*.065);oscillator.frequency.exponentialRampToValueAtTime(hz*(kind==='snail'?.66:1.01),now+i*.065+.13);gain.gain.setValueAtTime(.0001,now+i*.065);gain.gain.exponentialRampToValueAtTime(kind==='snail'?.055:.033,now+i*.065+.018);gain.gain.exponentialRampToValueAtTime(.0001,now+i*.065+.20);oscillator.connect(gain).connect(ac.destination);oscillator.start(now+i*.065);oscillator.stop(now+i*.065+.22);});}catch(e){}}
 function notify(text,duration=1500){const el=UI('notice');el.textContent=text;el.classList.add('show');clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>el.classList.remove('show'),duration);}
-function clearAi(){if(botTimer){clearTimeout(botTimer);botTimer=null;}}
-function updateUI(){const result=gameResult(state),white=state.t===1,currentTurn=result?result:((white?'White':'Black')+(settings.mode==='bot'&&!white?' · computer thinking':' to move'));UI('turnText').textContent=currentTurn;
+function clearAi(){if(botTimer){clearTimeout(botTimer);botTimer=null;}if(moveTimer){clearTimeout(moveTimer);moveTimer=null;}}
+function updateUI(){const result=gameResult(state),white=state.t===1,currentTurn=rolling?'🎲 Rolling for first…':result?result:((white?'White':'Black')+(settings.mode==='bot'&&!white?' · computer thinking':' to move'));UI('turnText').textContent=currentTurn;
  UI('roundText').textContent=result?'MATCH CONCLUDED':checked(state)?'KING UNDER ATTACK':'THE ROYAL CHASE';
  const until=settings.pace*2-(state.ply%(settings.pace*2));UI('countText').textContent=result?'—':until+' '+(until===1?'turn':'turns');
  UI('meter').style.width=(state.ply%(settings.pace*2))/(settings.pace*2)*100+'%';
  UI('snailInfo').textContent=result?'The royal chase has ended.':(until===1?'Danger! The snails advance after this move.':`Both snails advance in ${until} half-moves (${settings.pace} full rounds per step).`);
  UI('blackLabel').textContent=settings.mode==='bot'?'Computer':'Black';
  UI('subtitle').textContent=result?'Begin a new match to play again.':selected>=0?'Choose a glowing destination.':checked(state)?'Protect your king from chess threats.':'Select a chess piece to see legal moves.';
- UI('moveLog').innerHTML=notated.length?notated.map((m,i)=>`<div class="move-chip"><strong>${Math.floor(i/2)+1}${i%2?'…':'.'}</strong>${m}</div>`).join(''):'<div class="empty">Your opening move will appear here.</div>';
+ UI('moveLog').innerHTML=notated.length?notated.map(m=>`<div class="move-chip"><strong>${m.label}</strong>${m.text}</div>`).join(''):'<div class="empty">Your opening move will appear here.</div>';
  UI('undoBtn').disabled=UI('undoTop').disabled=hist.length===0;
  if(result&&!animating){const win=UI('winner');win.classList.add('show');UI('winIcon').textContent=result.startsWith('Draw')?'🤝':result.includes('snail')?'🐌':'🏆';UI('winTitle').textContent=result.startsWith('Draw')?'Draw':result.startsWith('White')?'White wins!':'Black wins!';UI('winDetails').textContent=result;}
  else UI('winner').classList.remove('show');}
-function choose(i){if(animating||gameResult(state)||(settings.mode==='bot'&&state.t===-1))return;
+function choose(i){if(rolling||animating||gameResult(state)||(settings.mode==='bot'&&state.t===-1))return;
  const moves=legal(state);if(selected===i){selected=-1;hintMove=null;updateUI();return;}
  if(selected>=0){const options=moves.filter(m=>m[0]===selected&&m[1]===i);if(options.length>1){pending=options;showPromotion();return;}if(options.length===1){doPlay(options[0]);return;}}
  if(isOn(i)&&side(state.b[i])===state.t){selected=i;hintMove=null;playTone('select');updateUI();}else{selected=-1;updateUI();}}
 function showPromotion(){const box=UI('promoChoices');box.innerHTML='';for(const m of pending){const bt=document.createElement('button');bt.textContent=({q:'♛',r:'♜',b:'♝',n:'♞'})[m[2]];bt.title=({q:'Queen',r:'Rook',b:'Bishop',n:'Knight'})[m[2]];bt.onclick=()=>{UI('promotion').classList.remove('show');doPlay(m);};box.appendChild(bt);}UI('promotion').classList.add('show');}
-function doPlay(m){clearAi();const old=state,fr=m[0],to=m[1],captured=old.b[to]!=='.'||m[3]==='ep',notation=moveName(old,m);hist.push({state:old,notes:notated.slice()});state=moveChess(old,m);notated.push(notation);selected=-1;hintMove=null;
+function doPlay(m){clearAi();const old=state,fr=m[0],to=m[1],captured=old.b[to]!=='.'||m[3]==='ep',notation=moveName(old,m);hist.push({state:old,notes:notated.slice()});state=moveChess(old,m);notated.push({label:old.full+(old.t===1?'.':'…'),text:notation});selected=-1;hintMove=null;
  fxMoves.push({from:fr,to,piece:old.b[fr],start:performance.now(),duration:390});if(captured){particleBurst(to,2,20);playTone('capture');}else playTone('move');
  let movedSnails=false;
  if(state.ply%(settings.pace*2)===0){const step=stepSnails(state);state={...step};fxSnails=step.events.positions.map(p=>({...p,start:performance.now()+280,duration:680}));for(const hit of step.events.victims)particleBurst(hit.cell,hit.id,35);movedSnails=true;playTone('snail');if(step.events.victims.length)notify('🐌 SNAIL ATTACK!',1850);else notify('THE SNAILS ARE COMING',1200);}
- animating=true;setTimeout(()=>{animating=false;updateUI();const outcome=gameResult(state);if(outcome){if(!outcome.startsWith('Draw'))playTone('win');return;}if(settings.mode==='bot'&&state.t===-1)botTimer=setTimeout(botMove,420);},movedSnails?1050:410);
+ animating=true;moveTimer=setTimeout(()=>{moveTimer=null;animating=false;updateUI();const outcome=gameResult(state);if(outcome){if(!outcome.startsWith('Draw'))playTone('win');return;}if(settings.mode==='bot'&&state.t===-1)botTimer=setTimeout(botMove,420);},movedSnails?1050:410);
  updateUI();}
 function getBotMove(){const options=legal(state);if(!options.length)return null;
  let ranked=options.map(m=>{const s=moveChess(state,m);const snState=s.ply%(settings.pace*2)===0?stepSnails(s):s;let value=assess(snState,-1)+Math.random()*18;if(gameResult(snState)?.startsWith('Black wins'))value+=200000;return{m,s:snState,value};}).sort((a,b)=>b.value-a.value);
@@ -152,10 +222,34 @@ function getBotMove(){const options=legal(state);if(!options.length)return null;
  let best=null,bestScore=-1e30;for(const candidate of ranked.slice(0,Math.min(12,ranked.length))){let opponent=legal(candidate.s),counter=0;if(opponent.length){counter=Infinity;for(const reply of opponent){const s2=moveChess(candidate.s,reply),after=s2.ply%(settings.pace*2)===0?stepSnails(s2):s2;const v=assess(after,-1);if(v<counter)counter=v;}}else counter=assess(candidate.s,-1);
  const score=candidate.value*.42+counter*.58;if(score>bestScore){bestScore=score;best=candidate.m;}}
  return best||ranked[0].m;}
-function botMove(){botTimer=null;if(settings.mode!=='bot'||state.t!==-1||gameResult(state))return;const move=getBotMove();if(move)doPlay(move);}
-function undo(){if(!hist.length)return;clearAi();const back=settings.mode==='bot'&&state.t===1&&hist.length>=2?2:1;for(let i=0;i<back&&hist.length;i++){const h=hist.pop();state=h.state;notated=h.notes;}selected=-1;pending=[];fxMoves=[];fxSnails=[];animating=false;hintMove=null;updateUI();notify('Move undone',900);}
-function reset(){clearAi();state=makeStart();hist=[];notated=[];selected=-1;pending=[];fxMoves=[];fxSnails=[];fxDust=[];animating=false;hintMove=null;settings.pace=Number(UI('pace').value);settings.mode=UI('mode').value;settings.threats=UI('showThreats').checked;settings.effects=UI('particlesToggle').checked;updateUI();notify('THE HUNT BEGINS',1100);}
-function hint(){if(settings.mode==='bot'&&state.t!==1)return;const options=legal(state);if(!options.length)return;let best=options[0],score=-1e30;for(const m of options){const s=moveChess(state,m),v=assess(s,state.t),captured=state.b[m[1]]!=='.'?values[state.b[m[1]].toLowerCase()]:0;let pt=v+captured*.8+Math.random()*25;if(pt>score){best=m;score=pt;}}hintMove=best;selected=best[0];notify('Hint: '+moveName(state,best),1400);updateUI();}
+function botMove(){botTimer=null;if(rolling||settings.mode!=='bot'||state.t!==-1||gameResult(state))return;const move=getBotMove();if(move)doPlay(move);}
+function undo(){if(rolling||!hist.length)return;clearAi();const back=settings.mode==='bot'&&state.t===1&&hist.length>=2?2:1;for(let i=0;i<back&&hist.length;i++){const h=hist.pop();state=h.state;notated=h.notes;}selected=-1;pending=[];fxMoves=[];fxSnails=[];animating=false;hintMove=null;updateUI();notify('Move undone',900);}
+function reset(forceRandom=false){
+ clearAi();clearInterval(rollTimer);clearTimeout(rollFinish);rollTimer=null;rollFinish=null;rolling=false;
+ UI('diceOverlay').classList.remove('show','rolling');UI('promotion').classList.remove('show');
+ state=makeStart();hist=[];notated=[];selected=-1;pending=[];fxMoves=[];fxSnails=[];fxDust=[];animating=false;hintMove=null;
+ settings.pace=Number(UI('pace').value);settings.mode=UI('mode').value;settings.threats=UI('showThreats').checked;settings.effects=UI('particlesToggle').checked;
+ const first=forceRandom?'random':UI('firstPlayer').value;
+ if(first==='random'){
+  rolling=true;
+  const die=UI('dieFace'),overlay=UI('diceOverlay'),final=1+Math.floor(Math.random()*6);
+  UI('diceHeadline').textContent='Rolling for first move…';UI('diceDetail').textContent='Odd roll = White · Even roll = Black';
+  overlay.classList.add('show','rolling');let ticks=0;die.textContent='⚄';updateUI();
+  rollTimer=setInterval(()=>{ticks++;die.textContent='⚀⚁⚂⚃⚄⚅'[Math.floor(Math.random()*6)];if(ticks>=11){clearInterval(rollTimer);rollTimer=null;
+   die.textContent='⚀⚁⚂⚃⚄⚅'[final-1];const winner=final%2===1?'White':'Black';state.t=winner==='White'?1:-1;
+   UI('diceHeadline').textContent=winner+' moves first!';UI('diceDetail').textContent='Rolled '+final+' · '+(winner==='White'?'Odd':'Even')+' wins the first move';
+   overlay.classList.remove('rolling');playTone('win');updateUI();
+   rollFinish=setTimeout(()=>{rollFinish=null;rolling=false;overlay.classList.remove('show');updateUI();notify(winner.toUpperCase()+' MOVES FIRST!',1450);
+     if(settings.mode==='bot'&&state.t===-1)botTimer=setTimeout(botMove,520);
+   },870);
+  }},90);
+ }else{
+  state.t=first==='black'?-1:1;updateUI();notify((state.t===1?'WHITE':'BLACK')+' MOVES FIRST!',1300);
+  if(settings.mode==='bot'&&state.t===-1)botTimer=setTimeout(botMove,580);
+ }
+}
+
+function hint(){if(rolling||(settings.mode==='bot'&&state.t!==1))return;const options=legal(state);if(!options.length)return;let best=options[0],score=-1e30;for(const m of options){const s=moveChess(state,m),v=assess(s,state.t),captured=state.b[m[1]]!=='.'?values[state.b[m[1]].toLowerCase()]:0;let pt=v+captured*.8+Math.random()*25;if(pt>score){best=m;score=pt;}}hintMove=best;selected=best[0];notify('Hint: '+moveName(state,best),1400);updateUI();}
 function lerp(a,b,t){return a+(b-a)*t;}
 function render(ts){requestAnimationFrame(render);const dt=Math.min((ts-(lastTs||ts))/16.6,3);lastTs=ts;const dpi=Math.min(devicePixelRatio||1,2),w=Math.max(1,Math.floor(canvas.clientWidth*dpi)),h=Math.max(1,Math.floor(canvas.clientHeight*dpi));if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);}
  sceneYaw+=(targetYaw-sceneYaw)*.11;
@@ -220,7 +314,9 @@ UI('cameraTop').onclick=()=>{targetYaw=0;targetElev=1.48;targetDist=window.inner
 UI('cameraFlip').onclick=()=>{targetYaw+=Math.PI;};
 UI('soundBtn').onclick=()=>{soundOn=!soundOn;UI('soundBtn').textContent=soundOn?'♪ Sound on':'♪ Sound off';};
 UI('undoBtn').onclick=UI('undoTop').onclick=undo;
-UI('resetTop').onclick=UI('resetSide').onclick=UI('winAgain').onclick=reset;
+UI('resetTop').onclick=UI('resetSide').onclick=UI('winAgain').onclick=()=>reset();
+UI('rollBtn').onclick=()=>{UI('firstPlayer').value='random';reset(true);};
+UI('firstPlayer').onchange=()=>{UI('firstMoveNote').textContent=UI('firstPlayer').value==='random'?'A six-sided die decides: odd = White, even = Black.':UI('firstPlayer').value==='black'?'House rule: Black opens. Computer will move first if enabled.':'Traditional chess: White moves first.';};
 UI('hintBtn').onclick=hint;
 UI('showThreats').onchange=()=>settings.threats=UI('showThreats').checked;
 UI('particlesToggle').onchange=()=>settings.effects=UI('particlesToggle').checked;
@@ -228,7 +324,7 @@ UI('mode').onchange=()=>notify('Start a new game to apply opponent change',1800)
 UI('pace').onchange=()=>notify('Start a new game to apply snail speed',1800);
 updateUI();requestAnimationFrame(render);
 // Expose narrowly-scoped diagnostics for automated game smoke tests.
-window.snailChessTest={getState:()=>state,getLegal:()=>legal(state).map(m=>algebraic(m[0])+algebraic(m[1])+m[2]),playUci:uci=>{const options=legal(state),move=options.find(m=>algebraic(m[0])+algebraic(m[1])+m[2]===uci);if(!move)return false;doPlay(move);return true;},reset};
+window.snailChessTest={getState:()=>state,squareWorld:i=>sqPos(i),getLegal:()=>legal(state).map(m=>algebraic(m[0])+algebraic(m[1])+m[2]),playUci:uci=>{if(rolling)return false;const options=legal(state),move=options.find(m=>algebraic(m[0])+algebraic(m[1])+m[2]===uci);if(!move)return false;doPlay(move);return true;},reset,isRolling:()=>rolling};
 })();
 </script>
 </body></html>
