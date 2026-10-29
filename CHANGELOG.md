@@ -1,26 +1,16 @@
-# Changelog
+# Release history
 
-## v2.0 — Chess Academy collection (October 29, 2026)
+## v2.1 — Style Studio & Unlockable Arenas (October 29, 2026)
+- Added original robot, fantasy-creature and cosmic 3D chess-piece variations, while retaining classic shapes and recognizability.
+- Added four distinct chessboard materials and four arena themes, with procedural exterior scenery around the 3D board.
+- Added four snail appearances (original, mecha, slime and nebula) to the two snail modes.
+- Added Style Studio: select/equip, locked-item preview, XP requirements, achievements, and local progress reset with confirmation.
+- Added XP awards for gameplay, special chess moves, completed guided lessons, games and snail survival.
+- Shared cosmetic preferences and progression with Starship Tri-Level Chess, using matching SVG themes and piece frames.
+- Preserved all four modes, existing computer opponent availability, guided lessons, standard chess movement, and original game mechanics.
 
-### New
-- Four-mode welcome menu with direct play and optional guided demonstrations.
-- Chess-only beginner mode with no snails.
-- Hungry Snails mode with independently tracked hunger, post-meal rest, and two-square dashes.
-- Three Hungry Snail difficulty presets: Training, Balanced, and Frenzy.
-- Persistent, explicit warnings that snails destroy pieces and cannot be blocked.
-- Special move prompts for castling, en passant and pawn promotion.
-- Instructor-led demonstrations with Next/Back/Finish navigation.
-- New `starship-trilevel-chess.html` with three primary 4 × 4 tiers and four movable 2 × 2 attack decks, interactive chess-style movement and guided tutorial.
-- Beginner-mode draw claims for threefold repetition and 50-move rule; automatic dead-material, fivefold-repetition and 75-move draws.
-- Documentation and deployment guidance.
+## v2.0.1 — Orientation patch
+- Fixed directional 3D piece orientation so black knights face toward the opposing team.
 
-### Preserved
-- Original Immortal Snail gameplay and snail pacing selector.
-- Full 0x88 chess move engine and standard special moves for standard and snail modes.
-- Existing perspective 3D rendering/WebGL fallback, sound, colors, hints, undo, and computer opponent.
-
-### Scope note
-The Starship 3D rules are an **educational house-rule variant**. They are deliberately simpler than the fan-authored tournament systems and are not represented as an official licensed rule set. Starship mode is currently two-player local only.
-
-## v1.2 — Earlier release
-- Original Immortal Snail Chess 3D with piece color customization, first-player dice, 3D movement reference and snails that pursue kings.
+## v2.0 — Chess Academy collection
+- Introduced Classic Chess, Hungry Snails, and a separate classroom Starship Tri-Level Chess game alongside Immortal Snail Chess.
