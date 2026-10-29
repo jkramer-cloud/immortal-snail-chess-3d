@@ -1,0 +1,125 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Starship Tri-Level Chess · Chess Academy</title>
+<style>
+:root{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;color:#edf8ff;color-scheme:dark}*{box-sizing:border-box}body{background:radial-gradient(ellipse at 45% 3%,#254961,#081321 70%);margin:0;min-height:100vh}button,select{font:inherit}button{background:#243e56;color:#efffff;border:1px solid #477189;border-radius:10px;padding:9px 12px;font-weight:750;cursor:pointer}button:hover{background:#31526d}button:focus-visible,.square:focus-visible{outline:3px solid #87f4dd;outline-offset:2px}button.primary{background:#6fe3cd;color:#0a2733;border-color:#89ffea}button:disabled{opacity:.4;cursor:not-allowed}.wrap{max-width:1600px;padding:18px;margin:0 auto}.top{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.top h1{margin:5px 0;font-size:clamp(24px,3vw,36px)}.tag{text-transform:uppercase;font-size:11px;letter-spacing:.14em;color:#7fe2d5;font-weight:900}.topbuttons{display:flex;gap:9px;flex-wrap:wrap}.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;margin-top:15px}.stage{border-radius:21px;overflow:hidden;border:1px solid #38586e;background:linear-gradient(#122f49,#081727);min-height:640px;position:relative}.stage svg{display:block;width:100%;height:650px;touch-action:none;cursor:grab}.stage svg.dragged{cursor:grabbing}.stage-banner{position:absolute;left:15px;top:13px;border:1px solid #3c7288aa;background:#061e2edb;border-radius:14px;padding:10px 13px;z-index:2;pointer-events:none}.stage-banner strong{display:block;font-size:18px}.stage-banner small{color:#a6c9d6}.foot{position:absolute;bottom:14px;left:15px;right:15px;display:flex;justify-content:space-between;align-items:center;gap:10px;pointer-events:none}.foot span{font-size:11px;color:#d2dfe3;background:#091c30e8;border-radius:18px;padding:9px}.foot button{pointer-events:auto}.controls{display:flex;flex-direction:column;gap:13px}.panel{background:#14293d;border:1px solid #34536b;border-radius:15px;padding:16px}.panel h2{font-size:14px;color:#e3f4fa;margin:0 0 10px;text-transform:uppercase;letter-spacing:.10em}.panel p,.panel li{font-size:12px;color:#adc4d4;line-height:1.65}.panel strong{color:#f4ddb2}.row{display:flex;gap:7px;flex-wrap:wrap}.row button{font-size:12px}.log{max-height:115px;overflow:auto;font-size:12px;line-height:1.8;color:#cce4e9}.pill{display:inline-block;border:1px solid #4d8190;background:#20445a;border-radius:20px;padding:5px 10px;font-size:11px;color:#b9f4e5}.tutorial{border-color:#75e0c8;background:#153f48}.tutorial p{font-size:13px;color:#e0f4f1}.square{cursor:pointer}.square:hover{filter:brightness(1.3)}.screen{position:fixed;inset:0;background:#05101ce9;backdrop-filter:blur(8px);display:grid;place-items:center;z-index:20;padding:14px}.screen[hidden]{display:none}.modal{max-width:640px;background:#172f45;border-radius:18px;border:1px solid #668da6;padding:25px}.modal h2{margin-top:4px}.modal p{line-height:1.7;color:#c2d6df}.choice{border-radius:12px;margin-top:15px;background:#0d2538;padding:12px;color:#c3e1e3}.warn{color:#ffdda5}.promotion{display:none;position:fixed;inset:0;background:#071421dc;z-index:25;align-items:center;justify-content:center}.promotion.show{display:flex}.promotion article{background:#19374d;padding:22px;border-radius:16px;border:1px solid #80a6b6}.promotion button{font-size:28px;margin:4px}.note{margin-top:6px;color:#bdcedd;font-size:11px}@media(max-width:980px){.layout{grid-template-columns:1fr}.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.stage,.stage svg{min-height:480px;height:530px}}@media(max-width:580px){.controls{grid-template-columns:1fr}.wrap{padding:10px}.stage svg{height:490px}.stage-banner strong{font-size:14px}.stage-banner small{font-size:10px}}
+</style></head><body><main class="wrap"><header class="top"><div><div class="tag">Chess Academy · Seven platforms · Classroom variant</div><h1>🚀 Starship Tri-Level Chess</h1></div><div class="topbuttons"><button onclick="location.href='./index.html'">← All modes</button><button id="rulesBtn">📘 Rules & walkthrough</button><button id="restartBtn" class="primary">↻ New match</button></div></header><div class="layout"><section class="stage"><div class="stage-banner"><strong id="turn">White to move</strong><small id="status">Select a piece to see reachable squares.</small></div><svg id="board" viewBox="0 0 1040 710" role="img" aria-label="Interactive seven-platform tri-level chess board"></svg><div class="foot"><span>Drag to orbit · Select a piece, then a green destination · Layer buttons on right</span><button id="viewBtn">◈ Rotate view</button></div></section><aside class="controls"><div class="panel"><h2>Choose your platform</h2><div class="row" id="layers"><button data-filter="all" class="primary">All 7</button><button data-filter="2">Upper</button><button data-filter="1">Middle</button><button data-filter="0">Lower</button></div><p>Selected: <strong id="selected">None</strong></p><div class="row"><button id="undo">↶ Undo</button><button id="hint">✧ Find a move</button><button id="tutorialBtn">▶ Guided play</button></div><p id="tip" class="warn">On this board, a highlighted square can be on another level. Check the platform label before moving.</p></div><div class="panel"><h2>Move an attack platform</h2><div class="row"><select id="deckChoice" aria-label="Choose attack platform"></select><button id="deckUp">↑ Raise</button><button id="deckDown">↓ Lower</button></div><p>Instead of moving a chess piece, you may shift an attack platform by one level if it holds <strong>exactly one of your pieces</strong>. The piece rides with it. A move cannot leave your king in check.</p></div><div class="panel"><h2>How to play</h2><p>White starts on the lower level; Black starts on the upper level. Three fixed 4×4 platforms and four movable 2×2 attack platforms make 64 squares. Pieces follow normal chess directions as viewed from overhead; they may switch platforms along valid paths.</p><p><strong>Classroom movement rule:</strong> A sliding piece may cross one platform seam or overlap per move. Knights leap between levels. Kings move one projected square. Pawn promotions work; castling and en passant are disabled in this variant. Standard check, checkmate and stalemate apply.</p><p><strong>Not official tournament rules:</strong> The original TV series did not define a complete rulebook. This approachable variant is designed to teach the geometry before more complex fan rule sets.</p></div><div class="panel"><h2>Move history</h2><div class="log" id="history">Select a piece to begin.</div></div><div id="lessonPanel" class="panel tutorial" hidden><h2>Instructor walkthrough</h2><span class="pill" id="lessonNumber">Step 1</span><p id="lessonMessage"></p><div class="row"><button id="lessonPrev">◀ Back</button><button class="primary" id="lessonNext">Show move ▶</button><button id="lessonFinish">Finish & play</button></div></div></aside></div><p class="note">Illustrated geometry and chess-style 3D pieces. No account, location or online service required. White and Black can play locally on one device.</p></main>
+<div id="welcome" class="screen" role="dialog" aria-modal="true"><div class="modal"><div class="tag">Seven-board chess</div><h2>Explore three levels of strategy</h2><p>In regular chess, every piece lives on the same board. Here, pieces move across <strong>three fixed main boards</strong> and <strong>four small attack platforms</strong>. The same square can be vertically above or below another square.</p><div class="choice">Choose a guided demonstration to watch legal moves across the stacked boards, or jump straight into a two-player game.</div><div class="row" style="margin-top:18px"><button id="startNow" class="primary">Start playing</button><button id="startGuided">Show guided playthrough</button></div><p class="note">Classroom house rules are shown on the right. This is a Star Trek-inspired setting, not a licensed Star Trek product.</p></div></div>
+<div id="promotion" class="promotion"><article><h2>Promote your pawn</h2><div id="promoButtons"></div></article></div>
+<script>
+'use strict';
+(()=>{
+const el=id=>document.getElementById(id),svgns='http://www.w3.org/2000/svg';
+const defs=[{id:'U',name:'Upper main',kind:'main',level:2,x:2,y:0,w:4,h:4},{id:'M',name:'Middle main',kind:'main',level:1,x:2,y:2,w:4,h:4},{id:'L',name:'Lower main',kind:'main',level:0,x:2,y:4,w:4,h:4},
+{id:'UA',name:'Upper port attack',kind:'deck',level:2,x:0,y:0,w:2,h:2,side:'port'},{id:'UB',name:'Upper starboard attack',kind:'deck',level:2,x:6,y:0,w:2,h:2,side:'starboard'},
+{id:'LA',name:'Lower port attack',kind:'deck',level:0,x:0,y:6,w:2,h:2,side:'port'},{id:'LB',name:'Lower starboard attack',kind:'deck',level:0,x:6,y:6,w:2,h:2,side:'starboard'}];
+const glyph={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙',k:'♚',q:'♛',r:'♜',b:'♝',n:'♞',p:'♟︎'};
+const side=p=>p===undefined||p==='.'?0:p===p.toUpperCase()?1:-1,owner=c=>c===1?'White':'Black';
+let pieces={},boards=[],turn=1,history=[],selected=null,highlight=[],list=[],angle=0,filter='all',pending=null,lesson=null,stepIdx=0,gameOver='';
+const id=(b,r,c)=>`${b}:${r}:${c}`;
+const parse=k=>{let [b,r,c]=k.split(':');return{b,r:+r,c:+c};};
+function start(){boards=structuredClone(defs);pieces={};for(const board of boards){if(board.id==='U'||board.id==='L'){const color=board.id==='L'?1:-1,row=board.id==='L'?3:0,pawnrow=board.id==='L'?2:1,back=['N','B','B','N'];for(let c=0;c<4;c++){pieces[id(board.id,row,c)]=color===1?back[c]:back[c].toLowerCase();pieces[id(board.id,pawnrow,c)]=color===1?'P':'p';}}else if(board.kind==='deck'){let white=board.id.startsWith('L');let main=white?'L':'U';const back=white?1:0,pawn=white?0:1,type=board.side==='port'?['R','Q']:['K','R'];for(let c=0;c<2;c++){pieces[id(board.id,back,c)]=white?type[c]:type[c].toLowerCase();pieces[id(board.id,pawn,c)]=white?'P':'p';}}}turn=1;selected=null;list=[];history=[];highlight=[];gameOver='';render();}
+const boardBy=id=>boards.find(x=>x.id===id),pos=(key)=>{let v=parse(key),b=boardBy(v.b);return{...v,bobj:b,x:b.x+v.c,y:b.y+v.r,z:b.level}};
+const keysAt=(x,y)=>boards.flatMap(b=>x>=b.x&&x<b.x+b.w&&y>=b.y&&y<b.y+b.h?[id(b.id,y-b.y,x-b.x)]:[]);
+function neighbours(a,b){if(a.b===b.b)return true;if(Math.abs(a.z-b.z)>1)return false;if(a.z===b.z)return true;const A=a.bobj,B=b.bobj; // overlap at either end permits a level transfer
+return (a.x>=B.x&&a.x<B.x+B.w&&a.y>=B.y&&a.y<B.y+B.h)||(b.x>=A.x&&b.x<A.x+A.w&&b.y>=A.y&&b.y<A.y+A.h);}
+function pathPossible(from,to,isLeap=false){const a=pos(from),dest=pos(to);if(isLeap)return Math.abs(a.z-dest.z)<=2;
+ const dx=Math.sign(dest.x-a.x),dy=Math.sign(dest.y-a.y),steps=Math.max(Math.abs(dest.x-a.x),Math.abs(dest.y-a.y));if(!steps)return false;
+ let nodes=new Map([[from,0]]);
+ for(let k=1;k<=steps;k++){
+  const x=a.x+dx*k,y=a.y+dy*k,next=new Map(),last=k===steps;
+  for(const node of keysAt(x,y)){
+   if((!last&&pieces[node])||(last&&side(pieces[node])===side(pieces[from])))continue;
+   for(const [prior,switches] of nodes){const prev=pos(prior),cur=pos(node);if(!neighbours(prev,cur))continue;const n=switches+(prev.b===cur.b?0:1);if(n>1)continue;if(!next.has(node)||n<next.get(node))next.set(node,n);
+   }
+  }nodes=next;if(!nodes.size)return false;
+ }
+ return nodes.has(to);
+}
+function candidate(from,to,piece,attack=false){const a=pos(from),b=pos(to);if(from===to||side(piece)===side(pieces[to])||(!attack&&pieces[to]&&pieces[to].toLowerCase()==='k'))return false;
+ const dx=b.x-a.x,dy=b.y-a.y,absX=Math.abs(dx),absY=Math.abs(dy),type=piece.toLowerCase(),target=pieces[to];
+ if(type==='n')return ((absX===1&&absY===2)||(absX===2&&absY===1))&&pathPossible(from,to,true);
+ if(type==='k')return Math.max(absX,absY)===1&&pathPossible(from,to,true);
+ if(type==='p'){
+  const dir=side(piece)===1?-1:1;
+  if(attack)return absX===1&&dy===dir&&pathPossible(from,to,true);
+  if(absX===1&&dy===dir)return !!target&&side(target)===-side(piece)&&pathPossible(from,to,true);
+  if(absX===0&&dy===dir)return !target&&pathPossible(from,to);
+  if(absX===0&&dy===2*dir&&a.y===(side(piece)===1?6:1)&&!target)return pathPossible(from,to);
+  return false;
+ }
+ const orth=(dx===0||dy===0),diag=absX===absY;if(type==='r'&&!orth||type==='b'&&!diag||type==='q'&&!orth&&!diag)return false;
+ return pathPossible(from,to);
+}
+function pseudo(color,attack=false){const moves=[];const destinations=boards.flatMap(b=>Array.from({length:b.w*b.h},(_,i)=>id(b.id,Math.floor(i/b.w),i%b.w)));
+ for(const [key,piece] of Object.entries(pieces))if(side(piece)===color){for(const to of destinations)if(candidate(key,to,piece,attack))moves.push({from:key,to});}return moves;
+}
+function kingKey(color,map=pieces){return Object.keys(map).find(k=>map[k]===(color===1?'K':'k'));}
+function inCheck(color){const king=kingKey(color);if(!king)return true;return pseudo(-color,true).some(m=>m.to===king);}
+function applyMove(m){const piece=pieces[m.from],captured=pieces[m.to];delete pieces[m.from];pieces[m.to]=piece;
+ if(piece.toLowerCase()==='p'&&pos(m.to).y===(side(piece)===1?0:7))pieces[m.to]=side(piece)===1?'Q':'q';
+ turn=-turn;return {piece,captured};}
+function legalMoves(){const moves=pseudo(turn);return moves.filter(m=>{const save=pieces;pieces={...pieces};const was=turn;applyMove(m);const valid=!inCheck(was);pieces=save;turn=was;return valid;});}
+function moveDeck(deckId,step,preview=false){let b=boardBy(deckId);if(!b||b.kind!=='deck')return{ok:false,why:'Choose an attack deck.'};const occupied=Object.entries(pieces).filter(([key])=>parse(key).b===deckId);if(occupied.length!==1||side(occupied[0][1])!==turn)return{ok:false,why:'Deck must hold exactly one of your pieces.'};const level=b.level+step;if(level<0||level>2)return{ok:false,why:'That level does not exist.'};if(boards.some(x=>x!==b&&x.kind==='deck'&&x.side===b.side&&x.level===level))return{ok:false,why:'A deck already occupies that docking position.'};const save=JSON.stringify({pieces,boards,turn});b.level=level;b.y=level===2?0:level===1?3:6;
+ if(inCheck(turn)){({pieces,boards,turn}=JSON.parse(save));return{ok:false,why:'Moving this deck would expose your king to check.'};}
+ if(preview){({pieces,boards,turn}=JSON.parse(save));return{ok:true};}
+ list.push(owner(turn)+' shifts '+b.name+' '+(step>0?'up':'down'));turn=-turn;return{ok:true};}
+function snapshot(){history.push(JSON.stringify({pieces,boards,turn,list,gameOver}));}
+function endCheck(){const moves=legalMoves();const deckMoves=boards.some(b=>b.kind==='deck'&&[-1,1].some(step=>moveDeck(b.id,step,true).ok));if(moves.length||deckMoves){gameOver='';return;}gameOver=inCheck(turn)?owner(-turn)+' wins by checkmate!':'Draw by stalemate.';}
+function play(m){snapshot();const {piece,captured}=applyMove(m);list.push(owner(-turn)+': '+piece.toUpperCase()+' '+pos(m.from).b+' → '+pos(m.to).b+(captured?' ×'+captured.toUpperCase():''));selected=null;highlight=[];endCheck();render();}
+function deckAction(step){if(lesson)return;const b=el('deckChoice').value;snapshot();const move=moveDeck(b,step);if(!move.ok){history.pop();el('tip').textContent=move.why;return;}selected=null;highlight=[];endCheck();render();}
+function undo(){if(!history.length||lesson)return;({pieces,boards,turn,list,gameOver}=JSON.parse(history.pop()));selected=null;highlight=[];render();}
+const s=(tag,atts={},txt)=>{const e=document.createElementNS(svgns,tag);for(const [k,v] of Object.entries(atts))e.setAttribute(k,v);if(txt!=null)e.textContent=txt;return e;};
+function projection(x,y,z){const a=angle;const c=Math.cos(a),q=Math.sin(a);const X=x-3.5,Y=y-3.5,px=X*c+Y*(-.72*q-.72),py=Y*.43+X*(.32*q+.32)-z*112;return [520+px*75,450+py*2.9];}
+// Use two vectors with mild perspective. Screen angles rotate while platform heights remain distinct.
+function screen(x,y,z){const rot=angle,xx=(x-3.5),yy=(y-3.5);return[510+xx*(65*Math.cos(rot)+23*Math.sin(rot))+yy*(-42*Math.cos(rot)+37*Math.sin(rot)),455+xx*(19*Math.cos(rot)-22*Math.sin(rot))+yy*(29*Math.cos(rot)+17*Math.sin(rot))-z*133];}
+function poly(points){return points.map(p=>p.map(n=>n.toFixed(1)).join(',')).join(' ');}
+function render(){const svg=el('board');svg.replaceChildren();svg.appendChild(s('defs',{},null));const shown=boards.filter(b=>filter==='all'||String(b.level)===filter),all=[];
+ if(filter==='all'&&window.innerWidth>640)svg.setAttribute('viewBox','0 0 1040 710');else{
+  const corners=shown.flatMap(b=>[screen(b.x,b.y,b.level),screen(b.x+b.w,b.y,b.level),screen(b.x+b.w,b.y+b.h,b.level),screen(b.x,b.y+b.h,b.level)]);
+  const minX=Math.min(...corners.map(p=>p[0]))-55,maxX=Math.max(...corners.map(p=>p[0]))+55,minY=Math.min(...corners.map(p=>p[1]))-80,maxY=Math.max(...corners.map(p=>p[1]))+66;
+  svg.setAttribute('viewBox',`${minX.toFixed(0)} ${minY.toFixed(0)} ${(maxX-minX).toFixed(0)} ${(maxY-minY).toFixed(0)}`);
+ }
+ for(const b of shown){const corners=[screen(b.x,b.y,b.level),screen(b.x+b.w,b.y,b.level),screen(b.x+b.w,b.y+b.h,b.level),screen(b.x,b.y+b.h,b.level)];const base=s('polygon',{points:poly(corners),'fill':b.kind==='deck'?'#244d71':'#2e6680',stroke:'#5cd8dc','stroke-width':'6','stroke-linejoin':'round',opacity:'.84'});svg.appendChild(base);
+  for(let r=0;r<b.h;r++)for(let c=0;c<b.w;c++){const key=id(b.id,r,c),x=b.x+c,y=b.y+r,p=[screen(x,y,b.level),screen(x+1,y,b.level),screen(x+1,y+1,b.level),screen(x,y+1,b.level)],cx=(p[0][0]+p[2][0])/2,cy=(p[0][1]+p[2][1])/2,selectedHere=selected===key,target=highlight.includes(key),dark=(x+y)%2===0;all.push({b,key,p,cx,cy,selectedHere,target,dark,piece:pieces[key],depth:b.level});}
+  const anchor=screen(b.x+b.w/2,b.y,b.level),label=s('text',{x:anchor[0],y:anchor[1]-16,'text-anchor':'middle','font-size':'19','font-weight':'900',fill:b.kind==='deck'?'#9feee7':'#ffe0a2',stroke:'#081925','stroke-width':'4','paint-order':'stroke'},b.name);svg.appendChild(label);
+ }
+ // Draw per platform in tier order with piece glyphs directly over their selectable polygons.
+ all.sort((a,b)=>b.depth-a.depth||a.cy-b.cy);
+ for(const c of all){const shape=s('polygon',{points:poly(c.p),fill:c.selectedHere?'#f5c65b':c.target?'#63e4b9':c.dark?'#1e3e59':'#b8dce2',stroke:c.b.kind==='deck'?'#6dd7d1':'#285268','stroke-width':1.8,class:'square',tabindex:'0',role:'button','aria-label':c.b.name+' '+(c.piece?c.piece:'empty'),'data-key':c.key});shape.addEventListener('click',()=>choose(c.key));shape.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(c.key);}});svg.appendChild(shape);
+   if(c.piece){const white=side(c.piece)===1;const text=s('text',{x:c.cx,y:c.cy+8,'text-anchor':'middle','font-size':c.b.kind==='main'?43:39,'font-family':'Segoe UI Symbol,DejaVu Sans,serif',fill:white?'#fff5db':'#122032',stroke:white?'#775f40':'#aad7f7','stroke-width':1.5,'paint-order':'stroke','pointer-events':'none','font-weight':'800'},glyph[c.piece]);svg.appendChild(text);}
+   if(c.target){svg.appendChild(s('circle',{cx:c.cx,cy:c.cy,r:5,fill:'#064e3b','pointer-events':'none'}));}
+ }
+ el('turn').textContent=gameOver||owner(turn)+' to move'+(inCheck(turn)?' · CHECK':'');el('status').textContent=selected?'Choose a highlighted destination on any visible platform.':'Select a piece to see legal chess moves.';
+ el('selected').textContent=selected?pos(selected).bobj.name+' · '+(pieces[selected]||'empty'):'None';el('history').innerHTML=list.length?list.slice(-18).map((x,i)=>`<div>${list.length- Math.min(18,list.length)+i+1}. ${x.replaceAll('<','&lt;')}</div>`).join(''):'The opening move will appear here.';
+ const deck=el('deckChoice'),old=deck.value;deck.replaceChildren(...boards.filter(b=>b.kind==='deck').map(b=>{const e=document.createElement('option');e.value=b.id;e.textContent=b.name+' · '+['Lower','Middle','Upper'][b.level];return e;}));deck.value=old||'LA';el('undo').disabled=history.length===0||!!lesson;
+}
+function choose(key){if(gameOver||lesson)return;const moves=legalMoves();if(selected){const m=moves.find(x=>x.from===selected&&x.to===key);if(m){play(m);return;}}
+ if(side(pieces[key])===turn){selected=key;highlight=moves.filter(m=>m.from===key).map(m=>m.to);if(filter!=='all'){filter='all';document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('primary',b.dataset.filter==='all'));}render();}else{selected=null;highlight=[];render();}}
+const tutorial=[
+{title:'Welcome aboard',body:'Three fixed main boards float at different heights. Four 2×2 attack decks occupy the edges. White begins below and Black above.',kind:'view'},
+{title:'Click a chess piece',body:'Choose White’s lower-middle knight. Notice all highlighted squares it can reach, including possible destinations on overlapping levels.',kind:'select',piece:'L:3:0'},
+{title:'Watch a valid move',body:'The knight jumps in an L-shape. Knights do not need an open path, including when switching levels.',kind:'move'},
+{title:'Preparing a deck move',body:'For this lesson only, the other three pieces on the lower port attack deck are removed, leaving one pawn. During normal play you must move or lose pieces to reach this position.',kind:'prepare'},
+{title:'Move the attack deck',body:'Now watch the lower port attack deck rise one level. Its single pawn rides along. Shifting a deck costs an entire turn.',kind:'deck'},
+{title:'Safety and victory',body:'A deck shift cannot leave your king in check. Pawns promote to queens at the last rank; checkmate wins and stalemate draws.',kind:'end'}];
+let tourState=null;
+function enterLesson(){start();lesson=true;stepIdx=0;el('welcome').hidden=true;el('lessonPanel').hidden=false;el('tip').textContent='This is a demonstration. Finish & play to start a fresh match.';displayLesson();}
+function displayLesson(){const st=tutorial[stepIdx];el('lessonNumber').textContent=`${stepIdx+1} / ${tutorial.length} · ${st.title}`;el('lessonMessage').textContent=st.body;el('lessonPrev').disabled=stepIdx===0;el('lessonNext').disabled=stepIdx===tutorial.length-1;el('lessonNext').textContent=stepIdx===tutorial.length-1?'Done':'Next example ▶';}
+function demoNext(){if(!lesson||stepIdx>=tutorial.length-1)return;stepIdx++;if(stepIdx===1){selected='L:3:0';highlight=legalMoves().filter(x=>x.from===selected).map(x=>x.to);}
+ if(stepIdx===2){const m=legalMoves().find(x=>x.from==='L:3:0'&&pos(x.to).x===3&&pos(x.to).y===5);if(m){selected=null;highlight=[];const piece=pieces[m.from];delete pieces[m.from];pieces[m.to]=piece;turn=-1;list.push('White demonstrates a knight jump');}}
+ if(stepIdx===3){for(const key of Object.keys(pieces))if(key.startsWith('LA:'))delete pieces[key];pieces['LA:0:0']='P';turn=1;list.push('Lesson setup: one pawn remains on Lower port attack');}
+ if(stepIdx===4){const outcome=moveDeck('LA',1);if(!outcome.ok)el('tip').textContent=outcome.why;}
+ if(stepIdx>=3){selected=null;highlight=[];}render();displayLesson();}
+function demoBack(){if(!lesson||stepIdx===0)return;let idx=stepIdx-1;start();lesson=true;stepIdx=0;for(let k=0;k<idx;k++)demoNext();displayLesson();}
+function finishLesson(){lesson=null;el('lessonPanel').hidden=true;start();}
+el('startNow').onclick=()=>{el('welcome').hidden=true;start();};el('startGuided').onclick=enterLesson;
+el('rulesBtn').onclick=()=>{el('welcome').hidden=false;};el('restartBtn').onclick=()=>{lesson=null;el('lessonPanel').hidden=true;start();};
+el('tutorialBtn').onclick=enterLesson;el('undo').onclick=undo;el('lessonNext').onclick=demoNext;el('lessonPrev').onclick=demoBack;el('lessonFinish').onclick=finishLesson;
+el('deckUp').onclick=()=>deckAction(1);el('deckDown').onclick=()=>deckAction(-1);
+el('hint').onclick=()=>{if(lesson)return;const m=legalMoves()[0];if(!m)return;selected=m.from;highlight=legalMoves().filter(x=>x.from===m.from).map(x=>x.to);el('tip').textContent='Try the highlighted move from '+pos(m.from).bobj.name+' to '+pos(m.to).bobj.name+'.';render();};
+el('viewBtn').onclick=()=>{angle=angle===0?.58:angle===.58?-.58:0;render();};
+document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('primary',x===b));selected=null;highlight=[];render();});
+let drag=null;el('board').addEventListener('pointerdown',e=>{if(e.target.tagName.toLowerCase()==='polygon')return;drag={x:e.clientX,y:e.clientY,a:angle};el('board').setPointerCapture(e.pointerId);});el('board').addEventListener('pointermove',e=>{if(!drag)return;angle=Math.max(-.9,Math.min(.9,drag.a+(e.clientX-drag.x)/420));render();});el('board').addEventListener('pointerup',()=>drag=null);
+start();if(location.search.includes('lesson=1'))enterLesson();
+window.starshipTest={get:()=>({boards,pieces,turn,selected,gameOver}),moves:()=>legalMoves(),pick:choose,reset:start,deck:moveDeck,check:inCheck,lesson:enterLesson};
+})();
+</script></body></html>

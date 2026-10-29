@@ -1,78 +1,91 @@
-# Immortal Snail Chess 3D
+# Immortal Snail Chess Academy v2.0
 
-**Play chess. Dodge snails. Survive.**
+A self-contained, classroom-friendly chess collection that expands the original Immortal Snail Chess 3D (v1.2) into four selectable experiences. The game works in a modern browser with no accounts, downloads, server, API key, images, or fonts required.
 
-A self-contained 3D browser chess game where two invincible snails slowly chase the kings. Play a friend on the same device or challenge a computer opponent. Every few rounds, the snails slide closer to their targets, destroying any chess piece they reach.
+## Quick start
 
-## Play
+1. Open **`index.html`**.
+2. Choose a game mode.
+3. Choose **Play** to start immediately or **Watch lesson** to see a narrated, step-by-step demonstration that moves real pieces on the board.
+4. After the demonstration, select **Finish & play** to start a fresh game. Reopen **Modes & lessons** at any time.
 
-Open **`index.html`** in Chrome, Edge, Firefox, or another modern browser. No installation, account, build process, or external dependencies are needed.
+**Important:** Keep both HTML files together in the same folder when using the app locally or on GitHub Pages. The Starship 3D mode opens `starship-trilevel-chess.html`. Hosting `index.html` alone makes that link unavailable.
 
-To publish on GitHub Pages, upload `index.html` and `README.md` to the root of the `immortal-snail-chess-3d` repository. In **Settings → Pages**, select **Deploy from a branch**, `main`, `/ (root)`. Your game will be at:
+## Four modes
 
-`https://YOUR-USERNAME.github.io/immortal-snail-chess-3d/`
+| Mode | Board | Snails | Opponents | What to learn |
+|---|---|---|---|---|
+| Classic Chess | 8 × 8 | None | Computer or two local players | Movement, king safety, captures, tactics, special moves |
+| Immortal Snail | 8 × 8 perspective/WebGL board | Two immortal snails | Computer or two local players | Chess strategy under unavoidable hazards |
+| Hungry Snails | Same perspective board | Adaptive movement and recovery | Computer or two local players | Timing, anticipating dashes and safe positions |
+| Starship Tri-Level Chess | 3 fixed 4 × 4 and 4 movable 2 × 2 platforms | None | Two local players | Multilevel reasoning and spatial movement |
 
-## Features
+### Classic Chess
 
-- Correct 32-piece standard starting layout, with fully modeled pieces and a rotatable 3D board.
-- A **How Pieces Move** sidebar with mini diagrams and explanations for every piece and the snails.
-- Animated **Roll Dice** selection of the opening player. **Odd = White; even = Black.**
-- Select **White (traditional)**, **Black (house rule)**, or **Random** under **Who moves first?**. Black-first games deliberately depart from standard chess rules.
-- Local two-player and single-player vs. computer modes, including computer-first games.
-- Adjustable snail movement speed, animated snail trails and captures, move hints, audio, and visual effects.
-- Standard chess movement, including castling, en passant, promotion, check, and checkmate, with snail squares as impassable hazards.
-- Independently customizable team colors, with preset palettes and a full color picker.
-- Undo, move history, legal destination highlights, overhead camera, drag-to-rotate, and zoom.
-- Mobile-responsive layout and a Canvas 2D fallback if WebGL is unavailable.
+Normal chess starts with all 32 pieces and White to move. The underlying rules engine includes legal-move highlighting, **castling**, **en passant**, choice of **queen/rook/bishop/knight promotion**, check, checkmate, and stalemate. It also detects insufficient-material draws, automatic fivefold repetition, the automatic 75-move limit, and offers a **Claim draw** control when the 50-move rule or threefold repetition is available.
 
-## How to Play
+The special-move help panel explains the setup and updates to an actionable prompt when a special move becomes legal. Standard chess has no immortal snails.
 
-1. Choose **Computer** or **2 players**, then choose the two teams’ piece colors from the presets or custom color pickers.
-2. Choose a snail speed and an opening-player rule. **Roll dice** to start a fresh match with a randomized first player, or select **New match** to follow your selected opening rule.
-3. Select a piece, then a highlighted destination. Follow the movement diagrams on the left (on mobile, below the board).
-4. The snails move **one square toward their target kings** after the configured number of half-moves. Classic mode moves them after every **six individual chess moves (three rounds)**.
-5. Snails cannot be captured or blocked. They destroy pieces they reach, including kings. You can win by checkmate or by a snail catching your opponent's king.
+### Original Immortal Snail
 
-The game begins with snails on the board. Their presence affects otherwise legal opening moves: you cannot land on or move through a snail square.
+The original variant remains available. Two snails begin in the middle of the board and each pursue an opposing king. Snails cannot be captured, pushed, or blocked, **and they destroy any chess piece (including kings) that they enter**. They move once per selected interval, measured in complete rounds of two chess turns. The original default interval is **3 complete rounds**. The existing speed selector still offers 2, 3, 4, or 5 rounds.
 
-## Controls
+The danger panel remains visible, and landing forecasts glow on the board. Students should not expect their pieces to protect them from the snail.
 
-| Action | Control |
-| --- | --- |
-| Select and move | Click or tap a piece, then its destination |
-| Rotate board | Drag |
-| Zoom | Mouse wheel |
-| Switch camera | **3D**, **Top**, **Flip** |
-| Undo | **Undo** |
-| See a suggested move | **Hint** |
-| Roll first player | **Roll dice** |
-| New match | **New match** or **New game** |
-| Team colors | **Choose your piece colors**, on the right of the board |
+### Hungry Snails — new variant
 
-## Version 1.2 — Accurate Controls and Custom Team Colors
+Three starting difficulty presets are available:
 
-- Audited standard legal movement for every chess piece, with dedicated tests for pawn moves and captures, knight jumps, rook/bishop/queen movement, checks, castling, en passant, and promotion.
-- Improved 3D click accuracy: the game detects clicks on the raised piece geometry before testing the chessboard surface. This especially helps when selecting a back-rank piece in an angled perspective view.
-- Added two independent color controls under **Choose your piece colors**: one for White's team and one for Black's team.
-- Choose a preset such as ivory, midnight, sky blue, coral, mint, rose, lavender or gold, or use the custom color picker for any color.
-- Color changes apply instantly during play, including the WebGL 3D pieces, the Canvas 2D fallback, and the small team indicators. No restart is needed, and your choices carry through new games in the same session.
-- When two teams look too similar in color, the interface provides a contrast warning.
-- Expanded the movement guide to clarify that displayed movement patterns assume a clear board; actual legal moves are indicated by destination highlights and can be restricted by other pieces, checks, and snails.
+- **Training:** snail tick every 4 complete rounds.
+- **Balanced:** snail tick every 3 complete rounds.
+- **Frenzy:** snail tick every 2 complete rounds.
 
-## Version 1.1 Changes
+Each snail tracks its own hunger and rest independently:
 
-- Fixed a precedence bug in 3D square placement that made pieces overlap or appear missing.
-- Added the movement-pattern reference panel.
-- Added animated dice rolls and starting-player selection.
-- Enabled Black-first turns and corrected move numbering for alternate starts.
-- Updated layout and controls for smaller screens.
+1. At a scheduled snail tick, a snail normally advances one neighboring square toward its target king.
+2. If it eats any piece, it **rests for one next scheduled snail tick**.
+3. If it moves through **two consecutive scheduled ticks without eating**, it **dashes up to two neighboring squares** on its next tick.
+4. During a dash, any piece touched on either square is eaten. A meal resets hunger and sets the rest delay.
+5. Snails cannot occupy the other snail's square. Pieces never block their path.
 
-## Technologies
+The in-game warning describes the upcoming tick, hunger buildup, and rest state. Threat highlights include **both squares** of a future dash and do not claim an attack is coming when the snail must rest.
 
-HTML5, CSS3, JavaScript, WebGL, Canvas 2D, and Web Audio API. The entire game is in a single file.
+### Starship Tri-Level Chess — experimental classroom rules
 
-## Project Notes
+The three large platforms are fixed at different heights. Four 2 × 2 attack decks are smaller, can travel up or down by one platform level, and can carry a single friendly piece. This takes the player's whole turn. The movement rules are simplified deliberately to make the game easier to teach:
 
-The computer opponent is intended for casual classroom and personal play, not tournament-strength competition. Immortal Snail Chess is a house-rule variant; the snail movement and alternate first-player rules are unique to this implementation.
+- Pawns, rooks, knights, bishops, queens and kings retain their ordinary **projected** chess directions.
+- Sliders can traverse a continuous route with **up to one platform seam/level switch in a move**, and their path cannot pass through occupying pieces.
+- Knights can leap to a matching target on another level. Kings move one projected square and cannot move into check.
+- An attack deck can travel one level if it contains **exactly one friendly piece**, the destination docking point is free, and moving it does not expose its king to check.
+- Pawns reaching the farthest rank promote automatically to a **queen**. **Castling and en passant are not used** in this version.
+- The game enforces check, checkmate and stalemate, and also provides Undo, move highlighting, layer focus, and a turn-by-turn guided introduction.
 
-No open-source license has been added. If you want to permit reuse and modification, add a `LICENSE` file with your chosen terms.
+**These are local classroom house rules, NOT a claim to implement an official Star Trek or federation rulebook.** Star Trek's tri-dimensional board is famous but rules were never fully defined in the original television program; fan-authored rule systems differ. This project uses an original, approachable 64-square movement system rather than claiming one of the contested federation standards.
+
+For reference, more comprehensive community rules and examples can be found at:
+
+- [World Tri Dimensional Chess Federation — Laws](https://w3dcf.com/information/laws)
+- [Charles Roth — Star Trek 3-D Chess Rules](https://www.thedance.net/~roth/TECHBLOG/chess.html)
+
+The game is an independent educational homage and is not affiliated with or endorsed by Star Trek or its rights holders.
+
+## How tutorials work
+
+**Classic, Original Snail and Hungry Snails** use an optional nine-move walkthrough in their real chess engine. The narration covers pawn movement, knights, bishops, a safe opening and castling. The active snail rules and countdown apply if a snail mode is selected. **Next move**, **Previous**, and **Finish & play** controls let students step through the example and restart a fresh game.
+
+**Starship Tri-Level** has its own six-step walkthrough: identifying the board levels, selecting a piece, demonstrating a knight move, preparing an example attack deck with one piece, moving the deck one level, and reviewing king safety. The special attack-deck position is explicitly a teaching setup; normal play begins with the full 32-piece initial position.
+
+## Classroom notes and controls
+
+- The first three modes support **Computer** and **Two players**; the Starship mode supports **two local players** (no computer opponent yet).
+- Drag the regular 3D board to rotate it; scroll to zoom; select the overhead view for easier movement. The original chess pieces retain adjustable color presets.
+- The Starship board is a lightweight isometric, interactive SVG with selectable levels, click/touch/keyboard-selectable squares, a basic viewpoint rotation and attack deck shift controls.
+- Both games work without external network resources after the HTML files are available.
+- All files are plain HTML/CSS/JavaScript; no bundler, external sprites, images, or installation is needed.
+
+## Deployment
+
+Upload **both** `index.html` and `starship-trilevel-chess.html` to the **Immortal Snail Chess** GitHub Pages repository root. Do not upload this game's `index.html` into the **main Naches Learning Hub** repository. The current Learning Hub link should continue to open the updated game at the same published address.
+
+See `UPLOAD_INSTRUCTIONS.md` for a step-by-step GitHub checklist. Screenshots in `PREVIEWS/` are optional and do not need to be deployed.
