@@ -94,10 +94,34 @@
 @media(max-width:790px){.academy-scoreboard{flex:1;min-width:150px;justify-content:space-between}}
 @media(max-width:480px){.academy-scoreboard{flex:0 0 100%;order:-1}.progress-panel-top strong{font-size:17px}}
 </style>
+<style id="chessFieldGuideStyles">
+/* Integrated Chess Field Guide v2.3: educational UI; no changes to core game rules. */
+.guide-launch{border-color:#4f9d9a;background:linear-gradient(120deg,#204e57,#244365);color:#dffff8}
+.guide-launch:hover{background:#286675;border-color:#6adeca}
+.field-guide-intro{font-size:11px;line-height:1.5;color:#bcd8df;margin:0 0 10px}
+.field-guide-launch-inline{width:100%;font-size:12px;padding:9px;margin-top:11px}
+.move-history-tools{display:flex;align-items:center;justify-content:space-between;gap:9px;margin:-4px 0 10px}
+.move-history-tools label{display:flex;align-items:center;gap:5px;cursor:pointer;color:#c5dae3;font-size:11px}
+.move-history-tools input{accent-color:#6fe2d1}
+.move-history-tools button{font-size:11px;padding:6px 9px;white-space:nowrap}
+#openingBanner{font-size:11px;line-height:1.5;color:#ffe2a8;margin:0 0 10px;padding:8px 9px;border:1px solid #4b6479;border-radius:10px;background:#1b3347}
+.move-list{max-height:300px;align-content:start}
+.move-chip{white-space:normal;overflow:visible;line-height:1.4;overflow-wrap:anywhere}
+.move-chip .chess-move-name button{color:#ffe4a6;font-weight:850;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;background:transparent;border:0;padding:2px 1px;font-size:10px;border-radius:3px;white-space:normal;text-align:left}.move-chip .chess-move-name button:hover,.move-chip .chess-move-name button:focus-visible{color:#fff3cc;background:#36506a}
+.move-chip .chess-move-name{border-top:1px solid #40556b;margin-top:6px;padding-top:5px;font-size:10px;font-weight:800;line-height:1.4;color:#ffe0a0;white-space:normal}
+.move-list .move-chip:has(.chess-move-name){border:1px solid #54727a;background:#233b4e}
+#fieldGuideDialog{padding:0;max-width:calc(100vw - 18px);width:min(1250px,calc(100vw - 24px));height:min(92dvh,970px);max-height:calc(100dvh - 16px);border:1px solid #7ab5bb;border-radius:18px;color:#eff8f3;background:#0d1e2d;box-shadow:0 25px 110px #000d;overflow:hidden}
+#fieldGuideDialog::backdrop{background:#061019d9;backdrop-filter:blur(5px)}
+.field-guide-dialog-header{height:54px;display:flex;align-items:center;justify-content:space-between;gap:9px;padding:7px 13px;background:linear-gradient(110deg,#183f4b,#1a2d41);border-bottom:1px solid #416575}
+.field-guide-dialog-header strong{font-size:14px;color:#e9fff5}
+.field-guide-dialog-header button{padding:7px 12px;font-size:12px}
+#fieldGuideFrame{width:100%;height:calc(100% - 54px);display:block;border:0;background:#091a29}
+@media(max-width:500px){.field-guide-dialog-header{padding:6px 9px}.field-guide-dialog-header strong{font-size:11px}.field-guide-dialog-header button{font-size:11px;padding:7px 8px}.move-history-tools{flex-wrap:wrap}}
+</style>
 </head>
 <body>
 <div class="app">
-<header class="header"><div class="brand"><div class="brandmark">🐌</div><div><div class="eyebrow">Chess Academy · Four game modes · v2.2</div><h1>Immortal Snail Chess Academy</h1></div></div><div class="top-actions"><div class="academy-scoreboard" aria-label="Saved chess experience" role="status"><div><div class="score-big" id="xpTopValue">★ 0 XP</div><div class="score-label">Chess Academy progress</div></div><span class="score-detail" id="xpTopStats">0 matches</span></div><button id="studioBtn">🎨 Style Studio</button><button id="chooseModeBtn">▦ Modes & lessons</button><button id="soundBtn" title="Toggle synthesized sounds">♪ Sound on</button><button id="undoTop">↶ Undo</button><button id="resetTop" class="primary">↻ New game</button></div></header>
+<header class="header"><div class="brand"><div class="brandmark">🐌</div><div><div class="eyebrow">Chess Academy · Four game modes · Field Guide v2.3</div><h1>Immortal Snail Chess Academy</h1></div></div><div class="top-actions"><div class="academy-scoreboard" aria-label="Saved chess experience" role="status"><div><div class="score-big" id="xpTopValue">★ 0 XP</div><div class="score-label">Chess Academy progress</div></div><span class="score-detail" id="xpTopStats">0 matches</span></div><button id="studioBtn">🎨 Style Studio</button><button id="fieldGuideOpenTop" class="guide-launch" type="button" title="Special chess rules, tactics and named openings">♟ Chess Field Guide</button><button id="chooseModeBtn">▦ Modes & lessons</button><button id="soundBtn" title="Toggle synthesized sounds">♪ Sound on</button><button id="undoTop">↶ Undo</button><button id="resetTop" class="primary">↻ New game</button></div></header>
 <main class="layout">
 <aside class="move-reference panel" aria-label="Chess piece movement reference"><h2>How pieces move</h2><p class="guide-intro">Click a piece to see its legal destinations. Special moves are announced when available. In snail modes, snails cannot be captured, blocked, or stopped by chess pieces.</p><div id="moveGuide" class="guide-list"></div><div class="guide-legend"><span class="guide-key"></span> Legal direction &nbsp; <span class="guide-x">×</span> Pawn captures<br>White pawns move upward; Black pawns move downward. Other pieces cannot jump over blockers (except knights).</div></aside>
 <section class="arena"><div class="arena-head"><div><div class="roundname" id="roundText">THE HUNT BEGINS</div><div class="turnlabel" id="turnText">White to move</div><div class="status-note" id="subtitle">Select a chess piece to see legal moves.</div></div><div class="countdown" id="countdownBox"><small>Snails move in</small><b id="countText">6 turns</b></div></div><canvas id="scene" class="scene selectable" tabindex="0" aria-label="Interactive 3D chess game. Click a piece and a highlighted square to move it."></canvas><div class="notice" id="notice"></div><div id="diceOverlay" class="dice-overlay" role="status" aria-live="polite"><div class="dice-card"><span class="die-face" id="dieFace">⚄</span><div class="dice-headline" id="diceHeadline">Rolling for first move…</div><div class="dice-detail" id="diceDetail">Odd roll = White · Even roll = Black</div></div></div><div class="arena-foot"><span class="legend" id="arenaLegend">Drag to rotate · Scroll to zoom · Tap to move</span><div class="camera-buttons"><button id="cameraHome" title="Return to angled view">◈ 3D</button><button id="cameraTop" title="View from overhead">▣ Top</button><button id="cameraFlip" title="Rotate the board 180 degrees">⟳ Flip</button></div></div><div class="mobile-hint">Tap a piece, then a highlighted square</div><div class="winner" id="winner"><div class="winner-card"><div class="trophy" id="winIcon">🏆</div><h3 id="winTitle">Victory!</h3><p id="winDetails"></p><button class="primary" id="winAgain">Play again</button></div></div></section>
@@ -108,7 +132,7 @@
 </div><p id="colorHelp" class="color-help" role="status" aria-live="polite">Pick a preset or any custom color. The pieces change instantly without restarting.</p></div>
 <div class="footer">Opponent, snail speed and first-move settings apply at the start of a new game. Piece colors update immediately.</div><div class="action-row"><button id="rollBtn" title="Roll a six-sided die to randomly decide who moves first">🎲 Roll dice</button><button id="resetSide" class="primary">New match</button></div></div>
 <div class="panel"><h2>Cosmetics & progress</h2><div class="progress-panel" aria-label="Chess experience and unlock progress"><div class="progress-panel-top"><strong id="xpSideValue">★ 0 XP</strong><span id="xpSideUnlock">Next: 100 XP</span></div><div class="progress-meter" role="progressbar" id="xpSideBar" aria-label="Progress to next cosmetic unlock" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="xpSideFill"></span></div><p class="progress-next" id="xpSideNext">Practice and play to unlock cosmetic styles.</p><p class="progress-statline" id="xpSideStats">0 games · 0 wins · 0 lessons</p></div><p class="empty" id="styleSummary">Classic pieces · Tournament board</p><div class="action-row"><button id="studioSideBtn">🎨 Customize</button><button id="trophyBtn">★ Trophy case</button></div></div>
-<div class="panel"><h2>Special chess moves</h2><div class="special-tip" id="specialTips">Special moves become available when their setup is legal.</div></div><div class="panel"><h2>Move history</h2><div class="move-list" id="moveLog"><div class="empty">Your opening move will appear here.</div></div></div>
+<div class="panel"><h2>Special chess moves</h2><div class="special-tip" id="specialTips">Special moves become available when their setup is legal.</div><button id="fieldGuideOpenTips" class="guide-launch field-guide-launch-inline" type="button">See interactive move examples</button></div><div class="panel"><h2>Move history &amp; names</h2><div class="move-history-tools"><label for="showMoveNames"><input id="showMoveNames" type="checkbox" checked> Name openings &amp; moves</label><button id="fieldGuideOpenHistory" type="button">Learn</button></div><div id="openingBanner" role="status">Opening names appear automatically as you play.</div><div class="move-list" id="moveLog"><div class="empty">Your opening move will appear here.</div></div></div>
 <div class="panel rules-panel"><h2 id="rulesHeading">How to survive</h2><div class="rules" id="ruleBody">Chess rules include <b>castling, en passant, promotion, and checks</b>. Snails occupy squares like indestructible obstacles, so you cannot move onto or through them. Every <b>three complete rounds</b>, both immortal snails crawl one square toward the enemy king. <b>They cannot be captured or blocked.</b> Anything they reach is destroyed, including kings. Win by checkmate or catching the enemy king with a snail. Look out for the <b>glowing warning squares</b> before they move.<br/><br/>Use the mouse to orbit the real 3D board, or switch to the overhead view for precise play.</div></div></aside></main>
 </div>
 
@@ -133,6 +157,7 @@
  <div id="studioCatalog"></div><div class="studio-section"><h3>Achievements</h3><div id="studioBadges" class="studio-badges"></div></div>
  <div class="studio-foot"><button class="danger" id="resetProfile">Reset local progress</button><span class="studio-tip">Locked styles can be previewed during this visit. Closing Style Studio restores your last unlocked selection.</span><button class="primary" id="closeStudio">Save selection & close</button></div>
  </section></div>
+<dialog id="fieldGuideDialog" aria-label="Interactive chess field guide"><div class="field-guide-dialog-header"><strong>Chess Field Guide · Learn while you play</strong><button id="fieldGuideClose" type="button">✕ Back to game</button></div><iframe id="fieldGuideFrame" title="Chess rules, tactics and opening demonstrations" src="./chess-guide.html" loading="lazy"></iframe></dialog>
 <script>
 'use strict';
 (()=>{
@@ -210,6 +235,140 @@ function gameResult(s){if(s.end)return s.end;
  return !legal(s).length?checked(s)?(s.t===1?'Black':'White')+' wins — checkmate!':'Draw — stalemate.':'';
 }
 function moveName(s,m){let p=s.b[m[0]],cap=s.b[m[1]]!=='.'||m[3]==='ep';if(m[3]==='castle')return m[1]>m[0]?'O-O':'O-O-O';return (p.toLowerCase()==='p'?(cap?files[m[0]&7]:''):p.toUpperCase())+(cap?'×':'')+algebraic(m[1])+(m[2]?'='+m[2].toUpperCase():'');}
+
+/* Student-friendly opening recognition uses actual move history, never board guesses.
+   These are known opening move sequences (not arbitrary one-move nicknames). */
+const CHESS_OPENINGS=[
+ ['e4','King’s Pawn Opening'],['d4','Queen’s Pawn Opening'],['Nf3','Réti Opening'],['c4','English Opening'],
+ ['e4 e5','King’s Pawn Game'],['e4 c5','Sicilian Defense'],['e4 e6','French Defense'],['e4 c6','Caro–Kann Defense'],['e4 d5','Scandinavian Defense'],['e4 d6','Pirc Defense setup'],['e4 Nf6','Alekhine Defense'],['e4 g6','Modern Defense'],
+ ['d4 d5','Queen’s Pawn Game'],['d4 Nf6','Indian Defense'],['d4 f5','Dutch Defense'],['d4 d5 c4','Queen’s Gambit'],
+ ['d4 d5 c4 dxc4','Queen’s Gambit Accepted'],['d4 d5 c4 e6','Queen’s Gambit Declined'],
+ ['e4 e5 f4','King’s Gambit'],['e4 e5 Nf3 Nc6','King’s Knight Opening'],
+ ['e4 e5 Nf3 Nc6 Bc4','Italian Game'],['e4 e5 Nf3 Nc6 Bc4 Bc5','Giuoco Piano'],
+ ['e4 e5 Nf3 Nc6 Bb5','Ruy Lopez (Spanish Opening)'],['e4 e5 Nf3 Nc6 Bb5 a6','Morphy Defense'],
+ ['e4 e5 Nf3 Nc6 d4','Scotch Game'],['e4 e5 Nf3 Nc6 Bc4 Bc5 b4','Evans Gambit'],
+ ['e4 e5 Bc4','Bishop’s Opening'],['e4 e5 Nf3 Nf6','Petrov Defense'],
+ ['e4 e5 Nc3','Vienna Game'],['e4 e5 Nf3 Nc6 Nc3 Nf6','Four Knights Game'],
+ ['e4 e5 Nf3 Nc6 Bc4 Nf6','Two Knights Defense'],
+ ['e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Bc5','Traxler Counterattack'],
+ ['e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Nxd5 Nxf7','Fried Liver Attack'],
+ ['e4 e5 Nf3 Nc6 Nc3 Nf6 Nxe5','Halloween Gambit'],
+ ['e4 e5 Nf3 Nc6 Bb5 Nf6','Berlin Defense'],
+ ['e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4','Evans Gambit Accepted'],
+ ['d4 d5 Bf4','London System setup'],['d4 Nf6 Bf4','London System setup'],
+ ['d4 Nf6 c4 g6','King’s Indian setup'],['d4 Nf6 c4 e5','Budapest Gambit'],
+ ['d4 Nf6 c4 e6 Nc3 Bb4','Nimzo–Indian Defense'],['d4 d5 c4 c6','Slav Defense'],
+ ['e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6','Sicilian Dragon Variation'],
+ ['b4','Orangutan Opening (Sokolsky)'],['g4','Grob Attack'],
+ ['e4 e5 Qh5 Nc6 Bc4 Nf6 Qxf7','Scholar’s Mate'],['f3 e5 g4 Qh4','Fool’s Mate']
+].map(([line,name])=>({moves:line.split(' '),name}));
+function normalizedMove(text){return text.replace(/[×]/g,'x').replace(/[+#?!]/g,'').replace(/0-0-0/g,'O-O-O').replace(/0-0/g,'O-O').trim();}
+function knownOpening(seq){let best=null;for(const entry of CHESS_OPENINGS){if(seq.length<entry.moves.length)continue;if(entry.moves.every((v,i)=>seq[i]===v)&&(!best||entry.moves.length>best.moves.length))best=entry;}return best;}
+let showMoveNames=true;
+try{showMoveNames=localStorage.getItem('snail-chess-move-names')!=='off';}catch(e){}
+/* A tactic label is only added when the resulting position really has the
+   geometry, not merely because the move looks dramatic in notation. */
+function directAttackSquares(s,from){
+ const piece=s.b[from],p=piece.toLowerCase(),color=side(piece),out=[];
+ if(color===0)return out;
+ if(p==='p')return [from-16*color-1,from-16*color+1].filter(isOn);
+ for(const d of directions[p]||directions.k){
+  for(let t=from+d;isOn(t);t+=d){
+   if(snailAt(s,t))break;
+   out.push(t);
+   if(s.b[t]!=='.'||p==='n'||p==='k')break;
+  }
+ }
+ return out;
+}
+function newlyPinnedPiece(s,from){
+ const p=s.b[from]?.toLowerCase();if(!['b','r','q'].includes(p))return false;
+ const enemy=-side(s.b[from]);
+ for(const d of (p==='q'?directions.k:directions[p])){
+  let first=-1;
+  for(let t=from+d;isOn(t);t+=d){
+   if(snailAt(s,t))break;
+   const target=s.b[t];if(target==='.')continue;
+   if(side(target)!==enemy)break;
+   if(first<0){if(target.toLowerCase()==='k')break;first=t;}
+   else{if(target.toLowerCase()==='k')return true;break;}
+  }
+ }
+ return false;
+}
+function tacticalNames(old,m,after){
+ if(activeVariant!=='classic')return [];
+ const from=m[0],to=m[1],p=after.b[to]?.toLowerCase(),mover=side(after.b[to]),notes=[];
+ if(['n','p'].includes(p)){
+  const victims=directAttackSquares(after,to).filter(i=>side(after.b[i])===-mover&&after.b[i].toLowerCase()!=='p');
+  if(victims.length>=2){
+   const types=victims.map(i=>after.b[i].toLowerCase());
+   notes.push(p==='n'&&types.includes('k')&&types.includes('q')?'Royal fork':p==='n'?'Knight fork':'Pawn fork');
+  }
+ }
+ if(newlyPinnedPiece(after,to))notes.push('Absolute pin');
+ const opposingKing=after.b.indexOf(mover===1?'k':'K');
+ if(m[3]!=='castle'&&opposingKing>=0&&checked(after)&&!directAttackSquares(after,to).includes(opposingKing))notes.push('Discovered check');
+ return notes;
+}
+function guideLessonForName(name){
+ const n=name.toLowerCase();
+ if(n.includes('en passant'))return 'enpassant';
+ if(n.includes('kingside castling'))return 'castleking';
+ if(n.includes('queenside castling'))return 'castlequeen';
+ if(n.includes('underpromotion'))return 'underpromotion';
+ if(n.includes('promotion'))return 'promotion';
+ if(n.includes('checkmate'))return 'mate';
+ if(n.includes('royal fork')||n.includes('knight fork')||n.includes('pawn fork'))return 'fork';
+ if(n.includes('pin'))return 'pin';
+ if(n.includes('discovered check'))return 'discovery';
+ if(n.includes('smothered mate'))return 'smothered';
+ if(n.includes('italian'))return 'italian';
+ if(n.includes('ruy lopez'))return 'ruy';
+ if(n.includes('sicilian dragon'))return 'sicilian';
+ if(n.includes('sicilian'))return 'sicilian';
+ if(n.includes('french'))return 'french';
+ if(n.includes('caro'))return 'carokann';
+ if(n.includes('queen’s gambit'))return 'queensgambit';
+ if(n.includes('king’s gambit'))return 'kingsgambit';
+ if(n.includes('london'))return 'london';
+ if(n.includes('scholar'))return 'scholars';
+ if(n.includes('fried liver'))return 'friedliver';
+ if(n.includes('halloween'))return 'halloween';
+ if(n.includes('evans'))return 'evans';
+ if(n.includes('orangutan'))return 'orangutan';
+ return '';
+}
+function namedMoveAnnotations(old,m,playedState,notation){
+ const seq=[...notated.map(n=>normalizedMove(n.text)),normalizedMove(notation)];
+ const opening=knownOpening(seq)?.name||'';
+ const previous=knownOpening(seq.slice(0,-1))?.name||'';
+ const notes=[];
+ if(opening&&opening!==previous)notes.push(opening);
+ if(m[3]==='ep')notes.push('En passant capture');
+ if(m[3]==='castle')notes.push(m[1]>m[0]?'Kingside castling':'Queenside castling');
+ if(m[2])notes.push((m[2]==='q'?'Pawn promotion':'Underpromotion')+' to '+({q:'queen',r:'rook',b:'bishop',n:'knight'})[m[2]]);
+ if(checked(playedState)){
+  const isMate=legal(playedState).length===0;
+  notes.push(isMate?'Checkmate':'Check');
+  if(isMate&&playedState.b[m[1]].toLowerCase()==='n'){
+   const defendingKing=playedState.b.indexOf(old.t===1?'k':'K');
+   if(directAttackSquares(playedState,m[1]).includes(defendingKing)&&directions.k.map(d=>defendingKing+d).filter(isOn).every(i=>side(playedState.b[i])===-old.t))notes.push('Smothered mate');
+  }
+ }
+ notes.push(...tacticalNames(old,m,playedState));
+ return notes;
+}
+function renderOpeningBanner(){
+ const banner=UI('openingBanner');if(!banner)return;
+ if(!showMoveNames){banner.textContent='Move labels are hidden. Turn on “Name openings & moves” to show them.';return;}
+ const seq=notated.map(n=>normalizedMove(n.text));const current=knownOpening(seq)?.name;
+ const earlier=[...notated].reverse().find(n=>n.knownOpening)?.knownOpening;
+ banner.textContent=current?'Recognized opening: '+current:earlier?'Earlier opening: '+earlier:'Play a few moves to discover named openings, special rules, and gambits.';
+}
+function openChessFieldGuide(lessonId=''){const dialog=UI('fieldGuideDialog');if(dialog&&!dialog.open){dialog.showModal();}if(!lessonId)return;const frame=UI('fieldGuideFrame');const select=()=>{try{frame.contentWindow?.postMessage({type:'snail-chess-guide-select',lessonId},location.origin);}catch(e){}};if(frame.contentDocument?.readyState==='complete')select();else frame.addEventListener('load',select,{once:true});}
+function closeChessFieldGuide(){const dialog=UI('fieldGuideDialog');if(dialog?.open)dialog.close();}
+
 const values={p:100,n:330,b:330,r:510,q:950,k:30000};
 function assess(s,team){const res=gameResult(s);if(res){if(res.startsWith('Draw'))return 0;return res.startsWith(team===1?'White':'Black')?200000:-200000;}
  let v=0;for(let i=0;i<128;i++)if(isOn(i)&&s.b[i]!=='.'){const piece=s.b[i],p=piece.toLowerCase(),col=side(piece);v+=(col===team?1:-1)*(values[p]+(p==='p'?(col===1?(6-(i>>4)):(i>>4)-1)*5:0));}
@@ -499,7 +658,7 @@ function updateUI(){
  UI('snailInfo').classList.toggle('snail-danger',activeVariant!=='classic'&&until===1&&!result); UI('snailInfo').classList.toggle('snail-careful',activeVariant!=='classic'&&until>1&&!result);
  UI('blackLabel').textContent=settings.mode==='bot'?'Computer':'Black';
  UI('subtitle').textContent=result?'Begin a new match to play again.':selected>=0?'Choose a glowing destination.':checked(state)?'Protect your king from chess threats.':'Select a chess piece to see legal moves.';
- UI('moveLog').innerHTML=notated.length?notated.map(m=>`<div class="move-chip"><strong>${m.label}</strong>${m.text}</div>`).join(''):'<div class="empty">Your opening move will appear here.</div>';
+ UI('moveLog').innerHTML=notated.length?notated.map(m=>`<div class="move-chip"><strong>${m.label}</strong>${m.text}${showMoveNames&&m.names?.length?`<div class="chess-move-name">${m.names.map(n=>`<button type="button" data-chess-lesson="${guideLessonForName(n)}" title="Open the Chess Field Guide">${n}</button>`).join(' · ')}</div>`:''}</div>`).join(''):'<div class="empty">Your opening move will appear here.</div>';renderOpeningBanner();
  UI('undoBtn').disabled=UI('undoTop').disabled=hist.length===0||!!lesson||!!result;UI('resignBtn').disabled=!!result||!!lesson||rolling;UI('resignBtn').title=lesson?'Finish the lesson before resigning':result?'This match is finished':'Concede this match without match-completion XP';
  const drawReason=drawClaimReason(state);UI('drawClaim').hidden=!drawReason||!!result;UI('drawClaim').textContent='Claim draw · '+drawReason;
  const tips=legal(state).filter(m=>m[3]==='castle'||m[3]==='ep'||!!m[2]);
@@ -515,7 +674,7 @@ function choose(i){if(rolling||animating||lesson||gameResult(state)||(settings.m
  if(selected>=0){const options=moves.filter(m=>m[0]===selected&&m[1]===i);if(options.length>1){pending=options;showPromotion();return;}if(options.length===1){doPlay(options[0]);return;}}
  if(isOn(i)&&side(state.b[i])===state.t){selected=i;hintMove=null;playTone('select');updateUI();}else{selected=-1;updateUI();}}
 function showPromotion(){const box=UI('promoChoices');box.innerHTML='';for(const m of pending){const bt=document.createElement('button');bt.textContent=({q:'♛',r:'♜',b:'♝',n:'♞'})[m[2]];bt.title=({q:'Queen',r:'Rook',b:'Bishop',n:'Knight'})[m[2]];bt.onclick=()=>{UI('promotion').classList.remove('show');doPlay(m);};box.appendChild(bt);}UI('promotion').classList.add('show');}
-function doPlay(m){clearAi();const old=state,fr=m[0],to=m[1],captured=old.b[to]!=='.'||m[3]==='ep',notation=moveName(old,m);hist.push({state:old,notes:notated.slice()});state=moveChess(old,m);notated.push({label:old.full+(old.t===1?'.':'…'),text:notation});selected=-1;hintMove=null;
+function doPlay(m){clearAi();const old=state,fr=m[0],to=m[1],captured=old.b[to]!=='.'||m[3]==='ep',notation=moveName(old,m);const playedState=moveChess(old,m),names=namedMoveAnnotations(old,m,playedState,notation),knownName=knownOpening([...notated.map(n=>normalizedMove(n.text)),normalizedMove(notation)])?.name||'';hist.push({state:old,notes:notated.slice()});state=playedState;notated.push({label:old.full+(old.t===1?'.':'…'),text:notation,names,knownOpening:knownName});selected=-1;hintMove=null;
  fxMoves.push({from:fr,to,piece:old.b[fr],start:performance.now(),duration:390});if(captured){particleBurst(to,2,20);playTone('capture');}else playTone('move');
  if(!lesson){reward('move');if(captured)reward('capture');if(m[3]==='castle')reward('castle');if(m[3]==='ep')reward('enpassant');if(m[2])reward('promotion');}
  let movedSnails=false;
@@ -664,6 +823,7 @@ UI('closeStudio').onclick=closeStudio;
 UI('resetProfile').onclick=()=>{if(!window.confirm('Reset all Chess Academy cosmetics, XP and achievements saved in this browser? This cannot be undone.'))return;profile=blankProfile();visual={...profile.selected};matchMoveCount=0;recordedMatch=false;saveProfile();applyVisualStyle();renderStudio();renderXP();};
 UI('studioBackdrop').addEventListener('click',e=>{if(e.target.id==='studioBackdrop')closeStudio();});
 window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!UI('studioBackdrop').hidden)closeStudio();});
+UI('fieldGuideOpenTop').addEventListener('click',()=>openChessFieldGuide());UI('fieldGuideOpenTips').addEventListener('click',()=>openChessFieldGuide());UI('fieldGuideOpenHistory').addEventListener('click',()=>openChessFieldGuide());UI('moveLog').addEventListener('click',e=>{const btn=e.target.closest('[data-chess-lesson]');if(btn)openChessFieldGuide(btn.dataset.chessLesson);});UI('fieldGuideClose').addEventListener('click',closeChessFieldGuide);UI('fieldGuideDialog').addEventListener('click',e=>{if(e.target===UI('fieldGuideDialog'))closeChessFieldGuide();});UI('showMoveNames').checked=showMoveNames;UI('showMoveNames').addEventListener('change',e=>{showMoveNames=e.target.checked;try{localStorage.setItem('snail-chess-move-names',showMoveNames?'on':'off')}catch(e){}updateUI();});
 applyVisualStyle();renderXP();updateUI();if(location.hash==='#style-studio')openStudio();requestAnimationFrame(render);
 // Expose narrowly-scoped diagnostics for automated game smoke tests.
 window.snailChessTest={getCosmetics:()=>({profile:JSON.parse(JSON.stringify(profile)),visual:{...visual}}),openStudio,closeStudio,selectSkin:(kind,id)=>{if(!STYLE_CATALOG[kind]?.some(c=>c[0]===id))return false;visual[kind]=id;if(owned(kind,id)){profile.selected[kind]=id;saveProfile();}applyVisualStyle();renderStudio();return true;},getState:()=>state,squareWorld:i=>sqPos(i),getLegal:()=>legal(state).map(m=>algebraic(m[0])+algebraic(m[1])+m[2]),
