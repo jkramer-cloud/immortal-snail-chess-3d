@@ -1,80 +1,56 @@
-# Immortal Snail Chess Academy v2.4 — Orbit Chess (Spherical World)
+# Immortal Snail Chess Academy — v2.5 Orbit Grand Edition
 
-**Game URL after you upload:** https://jkramer-cloud.github.io/immortal-snail-chess-3d/
+**Play:** https://jkramer-cloud.github.io/immortal-snail-chess-3d/
 
-This is a cumulative update to the existing **immortal-snail-chess-3d** repository. It adds **Sphere Chess (Orbit Chess)** as a fifth selectable mode, preserving the existing Classic Chess, Immortal Snail, Hungry Snails, Starship Tri-Level link, Field Guide, XP, Style Studio, lessons, and progress features. It is not a new repository and does not require an update to the PlayForge homepage.
+This release adds **Orbit Grand**, a standalone 112-square spherical chess variant, without changing the original Classic, Immortal Snail, Hungry Snails, Starship or 64-square Orbit Chess rules.
 
-## Exactly which files to upload
+## Install
 
-In `jkramer-cloud/immortal-snail-chess-3d`, using this ZIP:
+Upload these six files from the `Immortal-Snail-Chess-Academy-v2.5-Grand-GitHub-Ready.zip` package into the **existing** `jkramer-cloud/immortal-snail-chess-3d` GitHub repository:
 
-1. **Replace** the root `index.html`.
-2. **Replace** the root `README.md` (this documentation).
-3. **Add** `assets/orbit-chess.css` and `assets/orbit-chess.js`, preserving the `assets/` folder name.
-4. The included `chess-guide.html` is an **unchanged complete copy** of the currently published guide. You may leave your existing guide file alone; it is included only so this ZIP is a complete reproducible release.
-5. Keep every other existing repository file, particularly `starship-trilevel-chess.html`, artwork, saved data and previous assets. Do not delete anything not mentioned above.
-
-The **file locations** should be:
-
-```
+```text
 immortal-snail-chess-3d/
-├── index.html                      REPLACE
-├── README.md                       REPLACE
-├── chess-guide.html                EXISTING; unchanged
-├── assets/
-│   ├── orbit-chess.js              NEW
-│   └── orbit-chess.css             NEW
-└── ... other existing files ...    KEEP
+├── index.html                 # REPLACE existing homepage
+├── README.md                  # REPLACE existing documentation
+└── assets/
+    ├── orbit-chess.js         # ADD or REPLACE (64-square Orbit Chess, unchanged v2.4)
+    ├── orbit-chess.css        # ADD or REPLACE (64-square Orbit Chess styling, unchanged v2.4)
+    ├── orbit-grand.js         # NEW complete Orbit Grand game
+    └── orbit-grand.css        # NEW Orbit Grand styling
 ```
 
-**Publish:** Commit the four changed files to `main`; keep your GitHub Pages setting at `main` / root. Hard-refresh the existing game URL once deployment completes. Open **Sphere Chess** in the header or **Modes & lessons → Orbit Chess**.
+Leave all other files in the repository, including `chess-guide.html`, Starship Chess, and other site assets, in place. The package is cumulative relative to v2.3/v2.4: it includes **both** Orbit game modes and their styles, so you do not need to run a separate upgrade tool.
 
-## Orbit Chess gameplay
+If using GitHub's **Add file → Upload files**, unzip the archive and upload its contents, preserving the `assets/` subfolder. Commit to the repository's current Pages branch (`main`). Hard refresh the Pages URL after deployment. **Do not upload this ZIP into the PlayForge homepage repository.** The existing PlayForge chess card URL is unchanged.
 
-- Drag or swipe the planet to rotate, tap a piece, then tap a highlighted destination. Arrow keys rotate when the globe has focus; arrow buttons work on touch devices.
-- **Spherical house rules:** 8 files wrap horizontally (A and H touch); ranks 1 and 8 are polar boundaries and do *not* wrap. Rooks, bishops and queens slide along these wrapped files, stopping at blockers. Knights and diagonal pawn captures may cross the A–H seam. This is an experimental variant, *not official FIDE chess*.
-- **Standard move protections preserved for this variant:** checked king moves are forbidden; checks and checkmates work with wraparound attacks; standard-side castling, en passant, pawn promotions and basic drawn-position detection are implemented.
-- **Computer opponent:** White vs Computer (Black), with Casual and Strategist settings, or local two-player mode. Computer moves are legal under the spherical variant, not ordinary flat-chess rules.
-- **Camera follows the computer:** Enabled by default. After White moves, the camera smoothly focuses on the computer's selected piece, follows to its destination, and then returns to the player's central angle (optional). Both follow and return are separately toggleable.
-- **Undo / New globe match:** Independent from the original Snail/Classic game. The original chess modes are not changed.
-- The sphere is drawn with lightweight canvas-based perspective geometry and stylized pieces; it is not a fully modeled/WebGL chessboard. No third-party libraries, API keys or network connectivity are required after loading the site files.
+## Orbit Grand: experimental 112-square rules
 
-## Validation performed
+The surface contains **eight latitude ranks and fourteen longitude files (A–N)**. The first and last files connect; ranks terminate at the polar caps. The two armies occupy opposing meridians, Black on A and White on H.
 
-- Confirmed base `index.html`, `README.md`, `chess-guide.html` hashes exactly match the live repository versions before this release was built. The original chess game logic was left unchanged.
-- Chromium embedded-document smoke tests: initial spherical position has 20 legal moves; tapping a piece selects and highlights destinations; computer moved and camera rotated toward its source then destination before returning to White; mode switching restored Classic Chess; desktop and mobile layouts rendered without page errors.
-- Rule tests: A/H seam behavior for rooks, bishops, knights, pawn captures, and en passant; standard castling and four promotion choices; legal move king-safety validation across 2,313 generated move choices with 0 violations.
-- **Remaining verification:** Test GitHub Pages after uploading and on an actual school Chromebook (touchscreen, FPS, battery/thermals). Browser smoke tests do not constitute a full chess-engine proof or real-device performance certification.
+Each player receives **24 pieces**: the standard eight back-row pieces (king, queen, two rooks, two knights, two bishops) plus **sixteen pawns**. Eight pawns begin on each side of the player's home meridian. The two pawn fronts advance in **opposite longitude directions** toward the opposing home meridian. White promotes on A, Black promotes on H. Pawns can move one step in their assigned direction, or two on their first move if clear; they capture diagonally into adjacent latitude rows, forward along their pawn front. En passant tracks the exact pawn involved in a two-step move.
 
----
+Other pieces use familiar chess patterns on the grid, but can wrap horizontally across A/N. The kings must not move into check. **Castling is disabled** in Orbit Grand. Promotions to queen, rook, bishop or knight; check/checkmate; stalemate; basic insufficient-material; the automatic 75-move rule; and fivefold repetition are supported. There is no movement across the polar caps.
 
-## Earlier v2.3 release notes (unchanged history)
+These are **original house rules**, inspired by larger spherical chess concepts, not a direct recreation of a published ruleset or a recognized tournament chess variant. Balance and forced-mate properties are not fully established.
 
-# Immortal Snail Chess Academy — Integrated Field Guide Edition (v2.3)
+## Controls and classroom accessibility
 
-This update **replaces the existing `index.html`** and adds `chess-guide.html` in the same GitHub repository folder. The original game URL keeps working, including the Naches Learning Hub link.
+- Drag or swipe to rotate the planet; tap a piece, then a highlighted destination.
+- Use arrow keys to rotate with the globe focused. The **Center**, **Other side** and **Selected piece** buttons help recenter.
+- Toggle **Globe map** to display a clickable flat 8 × 14 overview, including both hidden sides. Students can also move using that grid.
+- Choose **Computer (Black)** with Casual or Strategist, or local two-player. Computer moves trigger an animated camera follow, enabled by default; the follow and return-to-player-view options can be turned off.
+- New match and undo are available. The flat map and the sphere use exactly the same legal moves.
 
-## Upload to GitHub
+## Preservation
 
-1. Open the `immortal-snail-chess-3d` repository.
-2. Upload the `index.html` and `chess-guide.html` files from this package to the **root** of the repository. Replace the existing `index.html` when prompted.
-3. Upload `README.md` if you want updated documentation.
-4. Wait for GitHub Pages to publish and refresh your original game link.
+- Existing Classic Chess, snail modes, cosmetics, local XP and progress features, rules and Chess Field Guide remain in their original code.
+- Existing **64-square Orbit Chess** lives in `assets/orbit-chess.js`, unchanged from v2.4.
+- `chess-guide.html` is not modified by this update; keep it on GitHub.
+- The original Starship Tri-Level Chess file and links remain unchanged.
+- No live server, account, API key, or database is needed. Browser local storage is unchanged for the older game.
 
-No Learning Hub update is required if it already opens `https://jkramer-cloud.github.io/immortal-snail-chess-3d/`.
+## Quality checks
 
-## What's new
+Browser tests passed for the new Grand desktop and mobile layouts, first legal player move, the computer-follow camera, its move history, the 112-cell optional map, mode switching to 64-square Orbit and back to Classic Chess, and no observed JavaScript errors in these test runs. A separate rules harness verified board/piece counts, seam movement, both pawn fronts, four-way promotion on both fronts, en passant victim removal, king safety and 3,114 legal-move outcomes sampled across a 70-ply sequence.
 
-- **Chess Field Guide** is available in the main game toolbar, the Special Chess Moves panel, and the Move History panel. It opens in an overlay and returns students to their existing match.
-- **28 interactive lessons** cover special moves (en passant, castling, promotion), chess outcomes, tactical patterns, and named openings/gambits.
-- **Automatic move annotations** appear in move history during actual play (human and computer moves). Names include recognized opening sequences, gambits, en passant, castling, promotion, check, checkmate, and conservatively detected knight/pawn forks, absolute pins, discovered checks, and a smothered mate in classic chess. Click a name for an example when available.
-- **Opening recognition panel** names recognized openings as the game progresses. These labels identify documented move patterns; not every move has a unique name.
-- Students may toggle annotations on or off; the preference is saved locally.
-- The updated file preserves the existing v2.2 core: 3D rendering, modes, snails, computer opponent, Style Studio, saved cosmetics, match/XP logic, rules, and undo mechanics.
-
-## Notes
-
-- The included `academy.html` from the earlier companion package is **not required** and should not replace this update.
-- Move-name annotations are teaching references, not a chess-engine evaluation. Opening names only appear for recognized move sequences.
-- A separate existing `starship-trilevel-chess.html` is not changed.
-- No account or internet service is needed beyond GitHub Pages hosting.
+**Not yet verified:** performance on physical school Chromebooks, long-term balance of these custom rules, and every unusual endgame. Test before broad classroom use.
