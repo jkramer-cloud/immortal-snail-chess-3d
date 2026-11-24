@@ -1,0 +1,25 @@
+/* Orbit Grand v2.5 — a separate optional mode. All classic/orbit styles remain intact. */
+.app.grand-playing > .layout{display:none}
+.app.grand-playing .top-actions{display:none}
+#grandChess[hidden],#grandPromotion[hidden],#grandMapWrap[hidden]{display:none!important}
+.grand-root{--orbit-gold:#ffdda2;margin-top:4px}
+.grand-root .orbit-banner{background:linear-gradient(115deg,#123b39,#253c58 50%,#51415c);border-color:#85bda2}
+.grand-root .orbit-arena{background:radial-gradient(ellipse at 52% 25%,#285561 0%,#15233f 55%,#091229 100%)}
+.grand-root .orbit-arena canvas{cursor:grab}
+.grand-mode-card{background:linear-gradient(135deg,#1a4949,#244e65 52%,#493b6d)!important}
+.grand-root .orbit-turn strong{color:#fff3ca}
+.grand-root .grand-map-panel{border-color:#7fb6ad88;background:linear-gradient(145deg,#173c46,#13273e)}
+.grand-root .grand-flat-scroll{max-width:100%;overflow-x:auto;padding-bottom:5px}
+.grand-flat-map,.grand-col-labels{display:grid;grid-template-columns:repeat(14,minmax(17px,1fr));min-width:252px}
+.grand-col-labels{text-align:center;font-size:10px;color:#c7e5e8;margin:4px 0 3px;font-weight:850}
+.grand-map-cell{width:100%;aspect-ratio:1/1;border:1px solid #364b62;border-radius:1px;padding:0;display:grid;place-items:center;font-family:'Segoe UI Symbol','DejaVu Sans',serif;font-size:clamp(12px,1.6vw,19px);line-height:1;color:#15273a;min-height:20px;cursor:pointer}
+.grand-map-cell.dark{background:#398d8c}
+.grand-map-cell.light{background:#d5e8d7}
+.grand-map-cell:nth-child(14n + 1),.grand-map-cell:nth-child(14n + 8){border-left:2px solid #ffcf79}
+.grand-map-cell.selected{background:#ffd573!important;outline:2px solid #fff;z-index:1}
+.grand-map-cell.target{outline:2px solid #68ff95;outline-offset:-3px;background:#9bdaac}
+.grand-map-cell.last:not(.selected):not(.target){box-shadow:inset 0 0 0 2px #eebc73}
+.grand-map-cell:focus-visible{outline:3px solid #fff199;z-index:2}
+.grand-map-legend{display:flex;gap:8px;flex-wrap:wrap;color:#e3f2e3;font-size:11px;margin-top:9px}
+.grand-map-legend span{padding:3px 8px;background:#285264;border-radius:6px}
+@media(max-width:570px){.grand-root .orbit-controls{bottom:5px}.grand-root .orbit-controls button{font-size:10px;padding:7px 8px}.grand-map-cell{min-height:22px}}
